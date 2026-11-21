@@ -10,7 +10,7 @@ const pages = ["home", "schedule", "rules", "rank", "report"];
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "assets/css"), { recursive: true });
 await mkdir(resolve(root, "assets/css"), { recursive: true });
-for (const page of pages) {
+for (const page of [...pages, "editorial", "booking-demo"]) {
   const { css } = compile(resolve(root, `assets/scss/${page}.scss`), {
     style: "compressed",
   });
@@ -32,7 +32,6 @@ await build({
   chunkNames: "shared/[name]-[hash]",
   legalComments: "eof",
 });
-await cp(resolve(root, "assets/css/editorial.css"), resolve(dist, "assets/css/editorial.css"));
 await cp(resolve(root, "assets/img"), resolve(dist, "assets/img"), {
   recursive: true,
   filter: (p) => !p.endsWith("README.md"),
@@ -52,7 +51,7 @@ for (const page of pages) {
   const file = page === "home" ? "index.html" : `${page}.html`;
   let html = await readFile(resolve(root, file), "utf8");
   // Version only compiled assets, keeping editable source paths unchanged.
-  for (const asset of [`assets/css/${page}.css`, `assets/js/pages/${page}/index.js`]) {
+  for (const asset of [`assets/css/${page}.css`, "assets/css/editorial.css", `assets/js/pages/${page}/index.js`]) {
     const bytes = await readFile(resolve(dist, asset));
     const version = createHash("sha256").update(bytes).digest("hex").slice(0,12);
     html = html.replaceAll(`"${asset}"`, `"${asset}?v=${version}"`);
@@ -74,8 +73,22 @@ for (const page of pages) {
 await cp(resolve(root, "reservation"), resolve(dist, "reservation"), {recursive:true});
 await cp(resolve(root, "admin"), resolve(dist, "admin"), {recursive:true});
 await mkdir(resolve(dist, "assets/js/demo"), {recursive:true});
-await cp(resolve(root, "assets/js/demo"), resolve(dist, "assets/js/demo"), {recursive:true});
-await cp(resolve(root, "assets/css/booking-demo.css"), resolve(dist, "assets/css/booking-demo.css"));
+await build({
+  entryPoints: ["reservation", "admin"].map(name => resolve(root, `assets/js/demo/${name}.js`)),
+  outdir: resolve(dist, "assets/js/demo"), bundle: true, splitting: true,
+  format: "esm", platform: "browser", target: ["es2022"], minify: true,
+  chunkNames: "shared/[name]-[hash]",
+});
+for (const page of ["reservation", "admin"]) {
+  const path = resolve(dist, page, "index.html");
+  let html = await readFile(path, "utf8");
+  for (const asset of ["assets/css/booking-demo.css", `assets/js/demo/${page}.js`]) {
+    const version = createHash("sha256").update(await readFile(resolve(dist, asset))).digest("hex").slice(0,12);
+    html = html.replaceAll(`"../${asset}"`, `"../${asset}?v=${version}"`);
+  }
+  await writeFile(path, html);
+}
+
 await writeFile(resolve(dist, ".nojekyll"), "");
 await writeFile(
   resolve(dist, "robots.txt"),

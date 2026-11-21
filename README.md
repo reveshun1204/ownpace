@@ -1,6 +1,10 @@
 # OWN PACE 公式サイト v2
 
-引継ぎパック「OWN_PACE_Work_Handoff_v1.zip」の制作指示書をもとにした、HOME + 下層4ページの実装です。
+添付のEditorial Redesignをもとに、不具合を修正した版です。HOME・下層4ページ・予約／管理のブラウザ内デモを含みます。
+
+**公開だけなら `dist/` の中身が完成済みです。手元でnpmを実行する必要はありません。** GitHub Actionsを使う場合は、下記の手順でソース一式を配置してください。
+
+修正内容と確認結果は `docs/FINAL_FIXES.md` に記載しています。
 
 ## 最初に見る場所
 
@@ -9,7 +13,7 @@
 - `docs/DIFFERENCES.md`: 旧版からの維持点と変更点
 - `SPECIFICATION.md`: 添付の制作指示書
 
-## 必要な環境
+## 編集・再ビルドする場合の環境
 
 Node.js 22以上 / npm。
 
@@ -24,6 +28,7 @@ HTML・SCSS・JSを保存すると再ビルドします。ブラウザを再読�
 ```sh
 npm run build
 npm run check
+npm test
 ```
 
 `dist/` へHTML・コンパイル済みCSS・バンドル済みJS・画像を書き出します。ファイルを直接ダブルクリックせず、ローカルサーバーから表示してください。
@@ -44,6 +49,8 @@ npm run check
 | --- | --- |
 | HOME | `index.html` |
 | 下層 | `schedule.html`, `rules.html`, `rank.html`, `report.html` |
+| 全体のEditorialテーマ | `assets/scss/editorial.scss` |
+| 予約・管理デモのスタイル | `assets/scss/booking-demo.scss` |
 | ページ別SCSS入口 | `assets/scss/home.scss` など |
 | セクションSCSS | `assets/scss/pages/ページ名/sections/_セクション名.scss` |
 | セクションJS | `assets/js/pages/ページ名/sections/セクション名.js` |

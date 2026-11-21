@@ -3,20 +3,22 @@ import { resolve, dirname } from 'node:path';
 import assert from 'node:assert/strict';
 const root=resolve(import.meta.dirname,'..');
 const dist=resolve(root,'dist');
-const pages=['index.html','schedule.html','rules.html','rank.html','report.html'];
+const pages=['index.html','schedule.html','rules.html','rank.html','report.html','reservation/index.html','admin/index.html'];
 const exists=async p=>{try{return(await stat(p)).isFile()}catch{return false}};
+const localFile=async path=>{try{if((await stat(path)).isDirectory())return resolve(path,'index.html')}catch{}return path};
 for(const file of pages){
  const html=await readFile(resolve(dist,file),'utf8');
  const ids=[...html.matchAll(/\bid="([^"]+)"/g)].map(m=>m[1]);
  assert.equal(ids.length,new Set(ids).size,`${file}: duplicate IDs`);
  for(const match of html.matchAll(/\b(?:href|src)="([^"]+)"/g)){
   const value=match[1].replaceAll('&amp;','&');
-  if(value.startsWith('#')){assert(ids.includes(value.slice(1)),`${file}: missing anchor ${value}`);continue;}
+  if(value.startsWith('#')){assert(!value.slice(1)||ids.includes(value.slice(1)),`${file}: missing anchor ${value}`);continue;}
   if(/^[a-z]+:/i.test(value))continue;
-  const parsed=new URL(value,'https://local.test/');
+  const parsed=new URL(value,'https://local.test/'+file);
   const path=decodeURIComponent(parsed.pathname.slice(1)),fragment=parsed.hash.slice(1);
-  assert(await exists(resolve(dist,path)),`${file}: missing asset ${value}`);
-  if(fragment&&path.endsWith('.html')){const target=await readFile(resolve(dist,path),'utf8');assert(target.includes(`id="${fragment}"`),`${file}: invalid cross-page anchor ${value}`)}
+  const targetFile=await localFile(resolve(dist,path));
+  assert(await exists(targetFile),`${file}: missing asset ${value}`);
+  if(fragment&&targetFile.endsWith('.html')){const target=await readFile(targetFile,'utf8');assert(target.includes(`id="${fragment}"`),`${file}: invalid cross-page anchor ${value}`)}
  }
  assert(html.includes('name="description"'),`${file}: description missing`);
  console.log('OK',file,'IDs, assets, links, metadata');

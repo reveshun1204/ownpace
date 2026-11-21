@@ -43,7 +43,7 @@ const server = createServer(async (req, res) => {
     const pathname = decodeURIComponent(
       new URL(req.url, "http://localhost").pathname,
     );
-    const target = resolve(
+    let target = resolve(
       dist,
       "." + pathname + (pathname.endsWith("/") ? "index.html" : ""),
     );
@@ -51,6 +51,14 @@ const server = createServer(async (req, res) => {
       res.writeHead(403);
       res.end();
       return;
+    }
+    if ((await stat(target)).isDirectory()) {
+      if (!pathname.endsWith("/")) {
+        res.writeHead(308, { Location: pathname + "/" + new URL(req.url, "http://localhost").search });
+        res.end();
+        return;
+      }
+      target = resolve(target, "index.html");
     }
     const content = await readFile(target);
     res.writeHead(200, {
@@ -71,7 +79,7 @@ server.listen(port, "127.0.0.1", () =>
 watch(root, { recursive: true }, (_, name) => {
   if (!name || /^(node_modules|dist|assets[\\/]css)([\\/]|$)/.test(name))
     return;
-  if (!/\.(html|scss|js|mjs)$/.test(name)) return;
+  if (!/\.(html|scss|js|mjs|json|svg|webp|png|jpe?g|woff2?)$/.test(name)) return;
   clearTimeout(timer);
   timer = setTimeout(build, 200);
 });
