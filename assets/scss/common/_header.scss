@@ -210,3 +210,14 @@ body.menu-lock {
  .site-nav .motion-toggle {display:block;border:1px solid #ffffff60;color:#fff;min-height:44px;padding:10px 15px;margin:0 0 26px;font-size:12px;}
  .menu-close {top:calc(12px + env(safe-area-inset-top,0px));min-height:44px;}
 }
+
+/* OWN PACE official header logo: maintain its aspect ratio at every breakpoint. */
+.site-header { background: #172b35f5; color: #f7eddc; border-bottom-color: #ffffff26; }
+.site-header .brand { width: clamp(150px, 17vw, 245px); max-width: none; flex: 0 0 auto; }
+.site-header .brand img { display:block; width:100%; height:auto; max-height:none; max-width:none; object-fit:contain; }
+.site-header .header-links > a, .site-header .header-controls { color: #f7eddc; }
+@media (max-width: 720px) {
+ .site-header { background: #172b35f5; color:#f7eddc; }
+ .site-header .brand { width: clamp(135px, 37vw, 185px); max-width:none; }
+ .site-header .brand img { width:100%; height:auto; max-height:none; max-width:none; }
+}
