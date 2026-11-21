@@ -33,9 +33,15 @@ assert(schedule.includes('mode=MONTH')&&schedule.includes('Asia%2FTokyo'),'JST i
 const rank=await readFile(resolve(dist,'rank.html'),'utf8');
 for(const name of ['REGULAR','ALLSTAR','LEGEND','GOAT'])assert(rank.includes(name),'rank '+name);
 assert(rank.includes('ランク特典'), 'rank benefits should be mentioned');
+// Verify each rank section contains a benefit notice without depending on attribute order.
 for (const name of ['regular','allstar','legend','goat']) {
-  const section=rank.match(new RegExp(`<section[^>]*id="${name}"[\s\S]*?<\/section>`))?.[0];
-  assert(section?.includes('rank-benefit'), `${name}: benefit notice missing`);
+  const opening = new RegExp(`<section\\b[^>]*\\bid=["']${name}["'][^>]*>`, 'i');
+  const match = opening.exec(rank);
+  assert(match, `${name}: rank section missing`);
+  const end = rank.indexOf('</section>', match.index + match[0].length);
+  assert(end !== -1, `${name}: rank section not closed`);
+  const section = rank.slice(match.index, end);
+  assert(/class=["'][^"']*\brank-benefit\b[^"']*["']/.test(section), `${name}: benefit notice missing`);
 }
 const report=await readFile(resolve(dist,'report.html'),'utf8');
 assert(report.includes('準備中'),'empty activity report');
