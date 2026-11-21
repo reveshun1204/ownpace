@@ -1,0 +1,16 @@
+@use "common/tokens";
+@use "common/base";
+@use "common/header";
+@use "common/footer";
+@use "common/motion";
+@use "common/subpage";
+@use "pages/rank/sections/hero";
+@use "pages/rank/sections/guide";
+@use "pages/rank/sections/rookie";
+@use "pages/rank/sections/regular";
+@use "pages/rank/sections/allstar";
+@use "pages/rank/sections/legend";
+@use "pages/rank/sections/goat";
+@use "pages/rank/sections/ending";
+
+@use "common/marquee";

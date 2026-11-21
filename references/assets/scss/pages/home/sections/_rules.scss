@@ -1,0 +1,9 @@
+#rules .scene-arc {
+  width: 150px;
+}
+
+
+#rules .scene-word {writing-mode:vertical-rl;right:4%;top:6%;font-size:clamp(90px,12vw,170px);opacity:.15;}
+#rules .scene-index {font-family:var(--display);font-size:clamp(44px,6vw,80px);line-height:1;color:#ffffff35;letter-spacing:-.055em;margin-top:20px;}
+@media(max-width:720px){#rules .scene-index{font-size:40px;margin-top:12px;}}
+
