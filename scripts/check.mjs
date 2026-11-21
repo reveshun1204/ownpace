@@ -32,7 +32,11 @@ const schedule=await readFile(resolve(dist,'schedule.html'),'utf8');
 assert(schedule.includes('mode=MONTH')&&schedule.includes('Asia%2FTokyo'),'JST initial month');
 const rank=await readFile(resolve(dist,'rank.html'),'utf8');
 for(const name of ['REGULAR','ALLSTAR','LEGEND','GOAT'])assert(rank.includes(name),'rank '+name);
-assert(!/誕生|無料|特典|クーポン/.test(rank),'rank benefits must stay hidden');
+assert(rank.includes('ランク特典'), 'rank benefits should be mentioned');
+for (const name of ['regular','allstar','legend','goat']) {
+  const section=rank.match(new RegExp(`<section[^>]*id="${name}"[\s\S]*?<\/section>`))?.[0];
+  assert(section?.includes('rank-benefit'), `${name}: benefit notice missing`);
+}
 const report=await readFile(resolve(dist,'report.html'),'utf8');
 assert(report.includes('準備中'),'empty activity report');
 assert(!report.includes('<picture'),'no synthetic activity images in REPORT');
