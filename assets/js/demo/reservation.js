@@ -6,14 +6,28 @@ async function initLine(){
   if(!window.liff)throw new Error('LIFF SDK unavailable');
   await liff.init({liffId:'2012769580-NXiNF8IB'});
   if(!liff.isLoggedIn()){status.textContent='LINEログインが必要です';saveProfile.disabled=false;saveProfile.textContent='LINEでログイン';saveProfile.onclick=()=>liff.login();return;}
-  const profile=await liff.getProfile();lineUserId=profile.userId;
+  const idToken = liff.getIDToken();
+  if (!idToken) throw new Error('LINE ID token unavailable');
+  status.textContent = 'サーバー側でLINE認証を確認しています…';
+  const response = await fetch('https://buptdnjahvwauslaanyo.supabase.co/functions/v1/ownpace-api', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ idToken }),
+    cache: 'no-store',
+  });
+  const result = await response.json();
+  if (!response.ok || result.success !== true || result.authenticated !== true) {
+    throw new Error('Server authentication failed: HTTP ' + response.status);
+  }
+  const profile = await liff.getProfile();
+  lineUserId = profile.userId;
   const key='op_line_name:'+lineUserId;
   activeName=localStorage.getItem(key)||'';
   nickname.value=activeName||profile.displayName.slice(0,24);
-  if(activeName){status.textContent=`「${activeName}」で利用中`;saveProfile.textContent='登録済み';render();return;}
+  if(activeName){status.textContent=`「${activeName}」で利用中（サーバー認証成功）`;saveProfile.textContent='登録済み';render();return;}
   nickname.disabled=false;saveProfile.disabled=false;
-  status.textContent='初回の表示名を確認してください';
-  saveProfile.onclick=()=>{const n=nickname.value.trim();if(!n)return;try{localStorage.setItem(key,n)}catch{status.textContent='表示名を保存できませんでした';return;}activeName=n;nickname.disabled=true;saveProfile.disabled=true;saveProfile.textContent='登録済み';status.textContent=`「${n}」で利用中`;render();};
- }catch(e){status.textContent='LINE認証に失敗しました。LINEから開き直してください。';console.error(e);}
+  status.textContent='サーバー認証成功。初回の表示名を確認してください';
+  saveProfile.onclick=()=>{const n=nickname.value.trim();if(!n)return;try{localStorage.setItem(key,n)}catch{status.textContent='表示名を保存できませんでした';return;}activeName=n;nickname.disabled=true;saveProfile.disabled=true;saveProfile.textContent='登録済み';status.textContent=`「${n}」で利用中（サーバー認証成功）`;render();};
+ }catch(e){lineUserId='';activeName='';nickname.disabled=true;saveProfile.disabled=true;render();status.textContent='LINEサーバー認証に失敗しました。LINEから開き直してください。';console.error('OWN PACE authentication failed');}
 }
 function render(){if(!lineUserId){$('#events').textContent='LINEログイン後に開催日を表示します。';return;}const d=get();$('#events').innerHTML=d.events.filter(e=>upcoming(e)).sort((a,b)=>(a.date+a.start).localeCompare(b.date+b.start)).map(e=>{const bookings=d.bookings.filter(b=>b.eventId===e.id),confirmed=bookings.filter(b=>b.status==='confirmed'),waiting=bookings.filter(b=>b.status==='waiting').sort((a,b)=>a.createdAt-b.createdAt),mine=bookings.find(b=>b.lineUserId===lineUserId&&activeName);const full=confirmed.length>=e.capacity;return `<article class="card"><div class="between"><p class="eyebrow">GAME DAY</p><span class="pill ${full?'full':''}">${e.closed?'受付停止':full?'満員 / WAITLIST':'受付中'}</span></div><h2>${fmt(e.date)}</h2><p class="muted">${esc(e.start)}–${esc(e.end)}<br>${esc(e.venue)}<br>参加費 ¥${Number(e.fee).toLocaleString()}</p><div class="between"><strong>参加 ${confirmed.length} / ${e.capacity}人</strong><span class="status">残り ${Math.max(0,e.capacity-confirmed.length)}枠</span></div><div class="bar"><span style="width:${Math.min(100,confirmed.length/e.capacity*100)}%"></span></div><details><summary>参加者一覧（${confirmed.length}人）</summary><div class="names">${confirmed.length?confirmed.map(b=>`<span class="name">${esc(b.nickname)}</span>`).join(''):'<span class="muted">まだ参加者はいません</span>'}</div></details>${waiting.length?`<p class="muted">キャンセル待ち：${waiting.length}人</p>`:''}${mine?`<p class="status">あなたの状態：${statusLabel(mine.status)}${mine.status==='waiting'?'（'+(waiting.findIndex(b=>b.id===mine.id)+1)+'番目）':''}</p>`:''}<div class="actions">${mine?`<button class="btn danger" data-action="cancel" data-event="${esc(e.id)}">予約をキャンセル</button>`:`<button class="btn" data-action="book" data-event="${esc(e.id)}" ${e.closed?'disabled':''}>${full?'キャンセル待ちに登録':'この日程を予約する'}</button>`}</div></article>`}).join('')||'<div class="empty">現在公開中の開催日はありません。</div>'}$('#events').addEventListener('click',ev=>{const btn=ev.target.closest('[data-action]');if(!btn)return;if(!lineUserId||!activeName){alert('先に表示名を登録してください');nickname.focus();return}const d=get(),e=d.events.find(x=>x.id===btn.dataset.event);if(!e)return;const mine=d.bookings.find(b=>b.eventId===e.id&&b.lineUserId===lineUserId);if(btn.dataset.action==='book'){if(mine||e.closed)return;if(!upcoming(e)){alert('この開催日は終了しています。');render();return;}const full=count(d,e.id)>=e.capacity;d.bookings.push({id:id(),eventId:e.id,nickname:activeName,lineUserId,status:full?'waiting':'confirmed',createdAt:Date.now()});save(d)}else if(mine){if(!confirm('この予約をキャンセルしますか？'))return;d.bookings=d.bookings.filter(b=>b.id!==mine.id);rebalance(d,e.id);save(d)}render()});window.addEventListener('storage',render);render();initLine();
