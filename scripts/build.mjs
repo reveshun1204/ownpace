@@ -10,7 +10,7 @@ const pages = ["home", "schedule", "rules", "rank", "report"];
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "assets/css"), { recursive: true });
 await mkdir(resolve(root, "assets/css"), { recursive: true });
-for (const page of [...pages, "editorial", "booking-demo"]) {
+for (const page of [...pages, "editorial", "booking-demo", "legal"]) {
   const { css } = compile(resolve(root, `assets/scss/${page}.scss`), {
     style: "compressed",
   });
@@ -69,6 +69,10 @@ for (const page of pages) {
     );
   }
   await writeFile(resolve(dist, file), html);
+}
+for (const slug of ["privacy", "terms"]) {
+  await cp(resolve(root, slug), resolve(dist, slug), {recursive:true});
+  if (base) urls.push(new URL(slug + "/", base).href);
 }
 await cp(resolve(root, "reservation"), resolve(dist, "reservation"), {recursive:true});
 await cp(resolve(root, "admin"), resolve(dist, "admin"), {recursive:true});

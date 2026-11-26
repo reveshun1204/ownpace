@@ -3,7 +3,7 @@ import { resolve, dirname } from 'node:path';
 import assert from 'node:assert/strict';
 const root=resolve(import.meta.dirname,'..');
 const dist=resolve(root,'dist');
-const pages=['index.html','schedule.html','rules.html','rank.html','report.html','reservation/index.html','admin/index.html'];
+const pages=['index.html','schedule.html','rules.html','rank.html','report.html','reservation/index.html','admin/index.html','privacy/index.html','terms/index.html'];
 const exists=async p=>{try{return(await stat(p)).isFile()}catch{return false}};
 const localFile=async path=>{try{if((await stat(path)).isDirectory())return resolve(path,'index.html')}catch{}return path};
 for(const file of pages){
