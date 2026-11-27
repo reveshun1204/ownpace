@@ -70,15 +70,13 @@ for (const page of pages) {
   }
   await writeFile(resolve(dist, file), html);
 }
-for (const slug of ["privacy", "terms"]) {
-  await cp(resolve(root, slug), resolve(dist, slug), {recursive:true});
-  if (base) urls.push(new URL(slug + "/", base).href);
+for (const page of ["reservation", "admin", "privacy", "terms"]) {
+  await mkdir(resolve(dist, page), {recursive:true});
+  await cp(resolve(root, page, "index.html"), resolve(dist, page, "index.html"));
 }
-await cp(resolve(root, "reservation"), resolve(dist, "reservation"), {recursive:true});
-await cp(resolve(root, "admin"), resolve(dist, "admin"), {recursive:true});
 await mkdir(resolve(dist, "assets/js/demo"), {recursive:true});
 await build({
-  entryPoints: ["reservation", "admin"].map(name => resolve(root, `assets/js/demo/${name}.js`)),
+  entryPoints: ["reservation-member", "admin"].map(name => resolve(root, `assets/js/demo/${name}.js`)),
   outdir: resolve(dist, "assets/js/demo"), bundle: true, splitting: true,
   format: "esm", platform: "browser", target: ["es2022"], minify: true,
   chunkNames: "shared/[name]-[hash]",
@@ -86,9 +84,14 @@ await build({
 for (const page of ["reservation", "admin"]) {
   const path = resolve(dist, page, "index.html");
   let html = await readFile(path, "utf8");
-  for (const asset of ["assets/css/booking-demo.css", `assets/js/demo/${page}.js`]) {
+  for (const asset of ["assets/css/booking-demo.css", `assets/js/demo/${page === "reservation" ? "reservation-member" : page}.js`]) {
     const version = createHash("sha256").update(await readFile(resolve(dist, asset))).digest("hex").slice(0,12);
     html = html.replaceAll(`"../${asset}"`, `"../${asset}?v=${version}"`);
+  }
+  if (page === "reservation") {
+    if (!html.includes('id="show-my-page"') || !html.includes('reservation-member.js?v=')) throw new Error("Reservation member HTML mismatch");
+    const js = await readFile(resolve(dist, "assets/js/demo/reservation-member.js"), "utf8");
+    if (!js.includes("my_page") || !js.includes("register_birthday") || !js.includes("show-my-page")) throw new Error("Reservation member bundle mismatch");
   }
   await writeFile(path, html);
 }

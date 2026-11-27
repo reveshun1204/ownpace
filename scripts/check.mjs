@@ -47,3 +47,8 @@ const report=await readFile(resolve(dist,'report.html'),'utf8');
 assert(report.includes('準備中'),'empty activity report');
 assert(!report.includes('<picture'),'no synthetic activity images in REPORT');
 console.log('OK HOME scene/FAQ structure, calendar settings, ranks and honest report empty state.');
+
+const reservation=await readFile(resolve(dist,'reservation/index.html'),'utf8');
+assert(reservation.includes('reservation-member.js?v='));
+assert(!reservation.includes('試作版'));
+assert(await exists(resolve(dist,'assets/css/legal.css')));
