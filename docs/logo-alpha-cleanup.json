@@ -1,0 +1,97 @@
+[
+  {
+    "file": "rank-allstar.png",
+    "rgb_identical": true,
+    "alpha_only": true,
+    "original_bbox": [
+      242,
+      307,
+      774,
+      717
+    ],
+    "clean_bbox": [
+      258,
+      378,
+      750,
+      711
+    ],
+    "original_sha256": "1e986ae17f70e42e192ec9e2bb038c555db2d773d032db73b085ee3be442c85d",
+    "clean_sha256": "d31e429e6fbbffe15fabaf866d5d1de8321d5253fc6c5a2721eb76493d1a4897"
+  },
+  {
+    "file": "rank-goat.png",
+    "rgb_identical": true,
+    "alpha_only": true,
+    "original_bbox": [
+      252,
+      312,
+      766,
+      712
+    ],
+    "clean_bbox": [
+      269,
+      347,
+      732,
+      692
+    ],
+    "original_sha256": "96221bfc3c79424384e347a652f7686db6800cd7cd28803de0977b1f5eebfa59",
+    "clean_sha256": "c0d4eb41637a8ef768fb5a61f4f75f20ee8e5eed6855f16ce942345e9a835ce8"
+  },
+  {
+    "file": "rank-rookie.png",
+    "rgb_identical": true,
+    "alpha_only": true,
+    "original_bbox": [
+      265,
+      307,
+      774,
+      717
+    ],
+    "clean_bbox": [
+      272,
+      377,
+      745,
+      710
+    ],
+    "original_sha256": "ce66641b9c17b650e867280cdd44e6f21e0aa451381065a6a93a014e931e6b5d",
+    "clean_sha256": "28d27c631f937a1a2d979fd18936fb9ef0f16d7f485ce0f6a329345c73c36eb1"
+  },
+  {
+    "file": "rank-legend.png",
+    "rgb_identical": true,
+    "alpha_only": true,
+    "original_bbox": [
+      247,
+      312,
+      777,
+      712
+    ],
+    "clean_bbox": [
+      266,
+      350,
+      755,
+      691
+    ],
+    "original_sha256": "0e91b6f2ef34ac62be60b8a4b8ac2b73a3236ba5e582e83fa12e079ef9d0c02e",
+    "clean_sha256": "3fdd031bf0b8abe9890afe1266872de8c3ac051c6897b0697d0e6e656e5035e9"
+  },
+  {
+    "file": "rank-regular.png",
+    "rgb_identical": true,
+    "alpha_only": true,
+    "original_bbox": [
+      244,
+      307,
+      779,
+      717
+    ],
+    "clean_bbox": [
+      257,
+      376,
+      757,
+      711
+    ],
+    "original_sha256": "6616ec7faa964b5ef3a5259c219b312f34e470c0c2797a8b18b53939c2f50fbe",
+    "clean_sha256": "ab2f6626150a677d33e36f38fe410c8499fd38e8cabdcde4adf37f2f8b22cd9a"
+  }
+]

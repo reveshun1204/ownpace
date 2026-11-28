@@ -46,7 +46,10 @@ for (const name of ['rookie','regular','allstar','legend','goat']) {
 }
 const report=await readFile(resolve(dist,'report.html'),'utf8');
 assert(report.includes('準備中'),'empty activity report');
-assert(!report.includes('<picture'),'no synthetic activity images in REPORT');
+const reportBody=report.match(/<section[^>]*class="[^"]*report-empty[^>]*>[\s\S]*?<\/section>/)?.[0];
+assert(reportBody,'honest report empty section retained');
+assert(!/<picture|<article|<time/.test(reportBody),'no fabricated activity article or photo in report body');
+assert(report.includes('assets/img/headings/report.webp'),'dedicated decorative REPORT heading');
 console.log('OK HOME scene/FAQ structure, calendar settings, ranks and honest report empty state.');
 
 const reservation=await readFile(resolve(dist,'reservation/index.html'),'utf8');

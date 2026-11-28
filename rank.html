@@ -70,17 +70,7 @@
     </dialog>
     <main id="main">
       <section class="sub-hero" id="hero">
-        <picture class=""
-          ><source
-            media="(max-width:720px)"
-            srcset="assets/img/common/backgrounds/night-768.webp" />
-          <img
-            src="assets/img/common/backgrounds/night-1536.webp"
-            alt=""
-            width="1536"
-            height="1024"
-            fetchpriority="high"
-        /></picture>
+        <picture class="sub-hero-image"><img src="assets/img/headings/rank.webp" alt="" width="1983" height="595" fetchpriority="high" decoding="async"></picture>
         <div class="wrap">
           <p class="eyebrow">OWN PACE / ランクガイド</p>
           <h1>OUR RANKS.</h1>
@@ -89,18 +79,11 @@
       </section>
       <section class="rank-guide" id="guide">
         <div class="wrap">
-          <p class="eyebrow reveal">ONE GAME AT A TIME</p>
-          <h2 class="section-title reveal">来るたびに、<br />少しずつ。</h2>
+          <header class="editor-heading reveal"><p class="editor-heading__en">ONE GAME AT A TIME.</p><h2 class="editor-heading__jp">来るたびに、<br />少しずつ。</h2></header>
           <p class="copy reveal">
             OWN PACEでは、実際に参加した回数に応じてランクが上がります。<br />予約した回数ではなく、管理者が出席登録した回数があなたの記録に。<br />今のランクや使える特典は、MY PAGEから確認できます。
           </p>
-          <ul class="rank-route">
-            <li><a href="#rookie">ROOKIE</a></li>
-            <li><a href="#regular">REGULAR</a></li>
-            <li><a href="#allstar">ALLSTAR</a></li>
-            <li><a href="#legend">LEGEND</a></li>
-            <li><a href="#goat">GOAT</a></li>
-          </ul>
+          <ul class="rank-route" aria-label="ランクを選ぶ"><li><a class="rank-choice rank-choice--rookie" href="#rookie" data-rank-tab="rookie" aria-label="ROOKIE・0回から"><span class="rank-choice__logo"><img src="assets/img/rank/emblems/rank-rookie.png" alt="ROOKIE" width="1024" height="1024" decoding="async"></span><span class="rank-choice__copy"><strong>ROOKIE</strong><small>0 GAMES</small></span><span class="rank-choice__arrow" aria-hidden="true">↗</span></a></li><li><a class="rank-choice rank-choice--regular" href="#regular" data-rank-tab="regular" aria-label="REGULAR・5回から"><span class="rank-choice__logo"><img src="assets/img/rank/emblems/rank-regular.png" alt="REGULAR" width="1024" height="1024" decoding="async"></span><span class="rank-choice__copy"><strong>REGULAR</strong><small>5 GAMES</small></span><span class="rank-choice__arrow" aria-hidden="true">↗</span></a></li><li><a class="rank-choice rank-choice--allstar" href="#allstar" data-rank-tab="allstar" aria-label="ALLSTAR・10回から"><span class="rank-choice__logo"><img src="assets/img/rank/emblems/rank-allstar.png" alt="ALLSTAR" width="1024" height="1024" decoding="async"></span><span class="rank-choice__copy"><strong>ALLSTAR</strong><small>10 GAMES</small></span><span class="rank-choice__arrow" aria-hidden="true">↗</span></a></li><li><a class="rank-choice rank-choice--legend" href="#legend" data-rank-tab="legend" aria-label="LEGEND・25回から"><span class="rank-choice__logo"><img src="assets/img/rank/emblems/rank-legend.png" alt="LEGEND" width="1024" height="1024" decoding="async"></span><span class="rank-choice__copy"><strong>LEGEND</strong><small>25 GAMES</small></span><span class="rank-choice__arrow" aria-hidden="true">↗</span></a></li><li><a class="rank-choice rank-choice--goat" href="#goat" data-rank-tab="goat" aria-label="GOAT・50回から"><span class="rank-choice__logo"><img src="assets/img/rank/emblems/rank-goat.png" alt="GOAT" width="1024" height="1024" decoding="async"></span><span class="rank-choice__copy"><strong>GOAT</strong><small>50 GAMES</small></span><span class="rank-choice__arrow" aria-hidden="true">↗</span></a></li></ul>
         </div>
       </section>
       <section class="rank-stage" id="rookie" aria-labelledby="rank-rookie-title">
@@ -170,27 +153,19 @@
       </section>
       <section class="rank-notes" id="rank-rewards" aria-labelledby="rank-notes-title">
         <div class="wrap">
-          <p class="eyebrow reveal">YOUR REWARDS</p>
-          <h2 id="rank-notes-title" class="reveal">特典について</h2>
+          <header class="editor-heading reveal"><p class="editor-heading__en">YOUR REWARDS.</p><h2 id="rank-notes-title" class="editor-heading__jp">特典について</h2></header>
           <p class="reveal">ランク無料券に有効期限はありません。誕生月特典は、その月の末日まで有効です。上位ランクでも誕生月特典は継続します。</p>
           <p class="reveal">無料券の枚数は各ランク到達時の新規発行枚数です。実際に使える枚数は、使用・取り消し・有効期限・利用条件を反映したMY PAGEの表示をご確認ください。</p>
           <p class="reveal">無料参加も参加回数に含まれます。出席記録が取り消された場合は、参加回数やランクに反映されます。</p>
           <a class="button button--solid" href="mypage/">MY PAGEで確認する</a>
         </div>
       </section>
-      <section class="sub-ending" id="ending">
-        <div class="wrap">
-          <p class="eyebrow reveal">AT YOUR OWN PACE</p>
-          <h2 class="reveal">ONE GAME AT A TIME.</h2>
-          <p class="reveal">
-            無理なく、自分のペースで。<br />また一緒にバスケしましょう。
-          </p>
-          <a
-            class="button button--light"
-            href="schedule.html"
-            data-cta="schedule"
-            >開催日程を見る</a
-          >
+      <section class="final-cta" id="ending" aria-labelledby="final-title">
+        <div class="wrap final-cta-inner">
+          <div class="final-cta-rule reveal" aria-hidden="true"></div>
+          <h2 class="reveal" id="final-title">SEE YOU ON<br />THE COURT.</h2>
+          <p class="cta-jp reveal">次のバスケで、会いましょう。</p>
+          <div class="cta-group reveal"><a class="button button--light editorial-cta" href="schedule.html" data-cta="final-schedule"><span class="cta-copy"><small>UPCOMING GAMES</small><strong>開催日程を見る</strong></span><span class="cta-arrow" aria-hidden="true">↗</span></a></div>
         </div>
       </section>
     </main>

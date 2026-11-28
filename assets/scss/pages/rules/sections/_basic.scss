@@ -1,11 +1,12 @@
-// Only content-specific team colours live here. Chapter layout is shared.
-.rules-page .rules-fee {display:flex;align-items:baseline;gap:10px;margin-block:8px 20px;}
-.rules-page .rules-fee strong {font-size:clamp(48px,6vw,64px);font-weight:800;letter-spacing:-.055em;line-height:1.1;}
-.rules-page .teams {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:28px 0;}
-.rules-page .team {--team:#275b85;--team-bg:#dfeefa;display:grid;gap:12px;padding:22px 8px;text-align:center;border:1px solid var(--rules-line);border-top:3px solid var(--team);background:var(--team-bg);color:var(--team);}
-.rules-page .team > small {font-size:12px;font-weight:700;letter-spacing:.06em;}
-.rules-page .team > strong {font-size:36px;font-weight:800;line-height:1;}
-.rules-page .team > strong small {font-size:14px;font-weight:500;margin-left:3px;}
-.rules-page .team-b {--team:#9c481b;--team-bg:#ffe4cf;}
-.rules-page .team-c {--team:#28664e;--team-bg:#dcefe3;}
-@media(max-width:480px){.rules-page .teams{gap:8px;}.rules-page .team{padding:20px 4px;}}
+// Only the team-specific content lives here; chapter rhythm is shared.
+.rules-page .rules-fee{display:flex;align-items:baseline;gap:10px;margin-block:8px 20px;}
+.rules-page .rules-fee strong{font-size:clamp(48px,6vw,64px);font-weight:800;letter-spacing:-.055em;line-height:1.1;}
+.rules-page .teams{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:28px 0;}
+.rules-page .team{--team:#43566e;--team-bg:#dce2e9;display:grid;align-content:center;justify-items:center;gap:14px;padding:20px 12px 26px;text-align:center;border:1px solid var(--team);border-radius:0;box-shadow:none;background:var(--team-bg);color:var(--team);}
+.rules-page .team .team-players{display:block;width:min(100%,180px);height:100px;object-fit:contain;}
+.rules-page .team>small{font-size:12px;font-weight:700;letter-spacing:.08em;}
+.rules-page .team>strong{font-size:36px;font-weight:700;line-height:1;}
+.rules-page .team>strong small{font-size:14px;font-weight:500;margin-left:3px;}
+.rules-page .team-b{--team:#8e6854;--team-bg:#e9ded5;}
+.rules-page .team-c{--team:#536b60;--team-bg:#dce4df;}
+@media(max-width:480px){.rules-page .teams{gap:8px;}.rules-page .team{padding:14px 5px 20px;gap:12px;}.rules-page .team .team-players{height:72px;}.rules-page .team>small{font-size:11px;}.rules-page .team>strong{font-size:32px;}}

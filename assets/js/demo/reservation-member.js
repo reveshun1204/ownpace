@@ -20,8 +20,8 @@ function updateView() {
   $('#booking-heading').textContent =
     isMyBooking ? 'MY BOOKING' : 'UPCOMING GAMES';
 
-  $('#show-booking').classList.toggle('secondary', isMyBooking);
-  $('#show-my-booking').classList.toggle('secondary', !isMyBooking);
+  $('#show-booking').classList.toggle('is-active', !isMyBooking);
+  $('#show-my-booking').classList.toggle('is-active', isMyBooking);
 
   $('#show-booking').setAttribute('aria-pressed', String(!isMyBooking));
   $('#show-my-booking').setAttribute('aria-pressed', String(isMyBooking));
@@ -48,14 +48,27 @@ function changeView(nextView) {
 $('#show-booking').onclick = () => changeView('booking');
 $('#show-my-booking').onclick = () => changeView('my-booking');
 const session=createLineSession({liffId:application.reservationLiffId,onAuthRequired:mode=>{
- activeName='';events=[];list.replaceChildren();list.hidden=true;$('#profile-panel').hidden=true;$('#member-nav').hidden=true;
+ activeName='';events=[];list.replaceChildren();list.hidden=true;$('#profile-panel').hidden=true;$('#member-nav').hidden=true;setProfileState('anonymous');
  $('#login-panel').hidden=false;const button=$('#line-login');button.hidden=mode==='client';button.textContent='LINEでログイン';
  $('#login-status').textContent=mode==='client'?'認証を更新するには、予約用LIFFをLINEから開き直してください。':'LINEでログインしてください。';
 }});
 const api=(action,fields={})=>session.request(action,fields);
 const dateFormat=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'long',day:'numeric',weekday:'short'});
 const timeFormat=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
-function registered(name){activeName=name;$('#member-nav').hidden=false;$('#booking-heading').hidden=false;list.hidden=false;$('#birth-initial').hidden=true;nickname.value=name;nickname.disabled=true;saveProfile.disabled=true;saveProfile.textContent='登録済み';status.textContent=`「${name}」で利用中（サーバー認証成功）`;}
+function setProfileState(state){
+ document.body.dataset.authState=state;
+ if(state!=='registered'){$('#member-nav').hidden=true;$('#booking-heading').hidden=true;list.hidden=true;}
+ $('#login-panel').hidden=state==='registered'||state==='unregistered';
+ $('#profile-panel').hidden=state!=='registered'&&state!=='unregistered';
+ $('#profile-fields').hidden=state!=='unregistered';
+ $('#registered-member').hidden=state!=='registered';
+}
+function registered(name){
+ activeName=name;setProfileState('registered');$('#welcome-name').textContent=name;
+ $('#member-nav').hidden=false;$('#booking-heading').hidden=false;list.hidden=false;
+ $('#birth-initial').hidden=true;nickname.value=name;nickname.disabled=true;saveProfile.disabled=true;
+ status.textContent='';
+}
 function render(){
  updateView();
 
@@ -83,9 +96,9 @@ try{
   if(!await session.start())return;
   view = readView();
   updateView();
-  const p=await api('profile');$('#login-panel').hidden=true;$('#profile-panel').hidden=false;
+  const p=await api('profile');
   if(p.registered){registered(p.nickname);await refresh();return;}
-  nickname.value=(p.displayName||'').slice(0,24);nickname.disabled=false;
+  setProfileState('unregistered');nickname.value=(p.displayName||'').slice(0,24);nickname.disabled=false;
   $('#birth-initial').hidden=false;$('#birth-initial').innerHTML=birthFields();const readBirth=bindBirth($('#birth-initial'));
   saveProfile.disabled=false;status.textContent='初回の表示名を確認してください';
   saveProfile.onclick=async()=>{
@@ -97,7 +110,7 @@ try{
   };
  }catch(e){
   if(activeName){status.textContent=e.message;list.textContent='開催日程を取得できませんでした。';}
-  else{$('#login-panel').hidden=false;$('#login-status').textContent=e.message;$('#line-login').hidden=session.isInClient;}
+  else{setProfileState('error');$('#login-status').textContent=e.message;$('#line-login').hidden=session.isInClient;}
  }
 }
 list.addEventListener('click',async ev=>{const btn=ev.target.closest('[data-action]');if(!btn||busy||!activeName)return;const action=btn.dataset.action;if(!confirm(action==='cancel'?'この予約をキャンセルしますか？':'この日程で参加予約しますか？ 満員時はキャンセル待ちになります。'))return;busy=true;list.querySelectorAll('button').forEach(b=>b.disabled=true);btn.textContent=action==='book'?'予約処理中…':'キャンセル処理中…';let done=false;try{const r=await api(action,{eventId:btn.dataset.event});done=true;status.textContent=r.status==='confirmed'?'参加予約が確定しました':r.status==='waitlisted'?'キャンセル待ちに登録しました':'予約をキャンセルしました';await refresh();}catch{status.textContent=done?'処理は完了しましたが、一覧を更新できません。開き直してください。':'処理結果を確認できません。予約状況を確認してください。';try{await refresh();}catch{list.textContent='予約状況を取得できません。ページを開き直してください。';events=[];}}finally{busy=false;if(events.length)render();}});

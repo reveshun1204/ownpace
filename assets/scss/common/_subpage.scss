@@ -21,7 +21,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, #0d2a35b3, transparent);
+  background: linear-gradient(90deg, #101b2db3, transparent);
 }
 .sub-hero .wrap {
   position: relative;
@@ -147,7 +147,7 @@
   color: var(--ink);
 }
 .join-dialog::backdrop {
-  background: #0d2a35bd;
+  background: #101b2dbd;
 }
 .dialog-head {
   display: flex;

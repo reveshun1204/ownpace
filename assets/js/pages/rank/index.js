@@ -8,6 +8,8 @@ import section5 from "./sections/legend.js";
 import section6 from "./sections/goat.js";
 import section7 from "./sections/ending.js";
 
+import initRankSelector from "./sections/selector.js";
+
 initCommon();
 section0();
 section1();
@@ -17,3 +19,5 @@ section4();
 section5();
 section6();
 section7();
+
+initRankSelector();

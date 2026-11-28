@@ -73,13 +73,13 @@
     </dialog>
     <main id="main">
       <section class="sub-hero sub-hero--compact" id="hero">
-        <picture class=""><source media="(max-width:720px)" srcset="assets/img/schedule/hero/scene-768.webp"><img src="assets/img/schedule/hero/scene-1536.webp" alt="" width="1536" height="1024" fetchpriority="high" decoding="async"></picture>
+        <picture class="sub-hero-image"><img src="assets/img/headings/schedule.webp" alt="" width="1983" height="595" fetchpriority="high" decoding="async"></picture>
         <div class="wrap">
           <p class="eyebrow">OWN PACE / 開催スケジュール</p>
           <h1>SCHEDULE.</h1>
           <p>開催スケジュール</p>
         </div>
-      </section><section class="calendar-section public-schedule" id="upcoming" aria-labelledby="upcoming-title"><div class="wrap"><header class="calendar-heading"><div><p class="eyebrow">UPCOMING GAMES / LIVE SCHEDULE</p><h2 id="upcoming-title">開催日程・空き状況</h2></div><span class="eyebrow">日本時間 / JST</span></header><div id="public-games" class="public-games" aria-live="polite" aria-busy="true"><p class="game-empty" role="status">開催日程を取得しています。</p><noscript><p>開催日程の表示にはJavaScriptを有効にしてください。</p></noscript></div><p class="inline-note">管理画面で公開された開催情報を表示しています。予約直前の空き状況は参加予約画面でご確認ください。</p></div></section>
+      </section><section class="calendar-section public-schedule" id="upcoming" aria-labelledby="upcoming-title"><div class="wrap"><header class="calendar-heading"><div class="editor-heading"><p class="editor-heading__en">UPCOMING GAMES.</p><h2 class="editor-heading__jp" id="upcoming-title">開催日程・空き状況</h2><p class="editor-heading__sub">LIVE SCHEDULE</p></div><span class="eyebrow">日本時間 / JST</span></header><div id="public-games" class="public-games" aria-live="polite" aria-busy="true"><p class="game-empty" role="status">開催日程を取得しています。</p><noscript><p>開催日程の表示にはJavaScriptを有効にしてください。</p></noscript></div><p class="inline-note">管理画面で公開された開催情報を表示しています。予約直前の空き状況は参加予約画面でご確認ください。</p></div></section>
       <section class="calendar-section calendar-supplement" id="calendar">
         <div class="wrap">
           <div class="calendar-heading">
@@ -141,11 +141,7 @@
       </section>
       <section class="chapter" id="booking">
         <div class="wrap chapter-inner">
-          <header class="chapter-heading">
-            <span class="chapter-number">HOW TO JOIN</span>
-            <h2>参加したい日が<br />見つかったら。</h2>
-            <p class="chapter-english">THREE SIMPLE STEPS</p>
-          </header>
+          <header class="chapter-heading editor-heading"><p class="editor-heading__en">HOW TO JOIN</p><h2 class="editor-heading__jp">参加したい日が<br />見つかったら。</h2><p class="editor-heading__sub">THREE SIMPLE STEPS</p></header>
           <div class="chapter-body reveal">
             <ol class="join-steps">
               <li>
@@ -182,11 +178,7 @@
       </section>
       <section class="chapter" id="notice">
         <div class="wrap chapter-inner">
-          <header class="chapter-heading">
-            <picture class="chapter-illustration"><source media="(max-width:720px)" srcset="assets/img/home/report/scene-768.webp"><img src="assets/img/home/report/scene-1536.webp" alt="" width="1536" height="1024" loading="lazy" decoding="async"></picture><span class="chapter-number">BEFORE YOU COME</span>
-            <h2>参加前に、<br />ここだけ確認。</h2>
-            <p class="chapter-english">GOOD TO KNOW</p>
-          </header>
+          <header class="chapter-heading editor-heading"><p class="editor-heading__en">BEFORE YOU COME</p><h2 class="editor-heading__jp">参加前に、<br />ここだけ確認。</h2><p class="editor-heading__sub">GOOD TO KNOW</p></header>
           <div class="chapter-body reveal">
             <ul class="rule-list">
               <li>開催日程を見るだけでは、参加予約は完了していません。</li>
@@ -203,17 +195,12 @@
           </div>
         </div>
       </section>
-      <section class="sub-ending" id="ending">
-        <div class="wrap">
-          <p class="eyebrow reveal">AT YOUR OWN PACE</p>
-          <h2 class="reveal">SEE YOU ON THE COURT.</h2>
-          <p class="reveal">都合のいい日があったら、一緒にやりましょう。</p>
-          <a
-            class="button button--light"
-            href="schedule.html"
-            data-cta="schedule"
-            >開催日程を見る</a
-          >
+      <section class="final-cta" id="ending" aria-labelledby="final-title">
+        <div class="wrap final-cta-inner">
+          <div class="final-cta-rule reveal" aria-hidden="true"></div>
+          <h2 class="reveal" id="final-title">SEE YOU ON<br />THE COURT.</h2>
+          <p class="cta-jp reveal">次のバスケで、会いましょう。</p>
+          <div class="cta-group reveal"><a class="button button--light editorial-cta" href="schedule.html" data-cta="final-schedule"><span class="cta-copy"><small>UPCOMING GAMES</small><strong>開催日程を見る</strong></span><span class="cta-arrow" aria-hidden="true">↗</span></a></div>
         </div>
       </section>
     </main>

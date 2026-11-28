@@ -9,7 +9,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 0 4%;
-  background: #f7f4edf5;
+  background: #f5f1e9f5;
   border-bottom: 1px solid var(--line);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
@@ -97,11 +97,11 @@
   margin: 0;
   padding: 0;
   border: 0;
-  background: #123542f7;
+  background: #14243ef7;
   color: #fff;
 }
 .site-nav::backdrop {
-  background: #12354299;
+  background: #14243e99;
 }
 .menu-shell {
   width: min(1050px, 86%);
@@ -212,12 +212,12 @@ body.menu-lock {
 }
 
 /* OWN PACE official header logo: maintain its aspect ratio at every breakpoint. */
-.site-header { background: #172b35f5; color: #f7eddc; border-bottom-color: #ffffff26; }
+.site-header { background: #14243ef5; color: #f7eddc; border-bottom-color: #ffffff26; }
 .site-header .brand { width: clamp(150px, 17vw, 245px); max-width: none; flex: 0 0 auto; }
 .site-header .brand img { display:block; width:100%; height:auto; max-height:none; max-width:none; object-fit:contain; }
 .site-header .header-links > a, .site-header .header-controls { color: #f7eddc; }
 @media (max-width: 720px) {
- .site-header { background: #172b35f5; color:#f7eddc; }
+ .site-header { background: #14243ef5; color:#f7eddc; }
  .site-header .brand { width: clamp(135px, 37vw, 185px); max-width:none; }
  .site-header .brand img { width:100%; height:auto; max-height:none; max-width:none; }
 }

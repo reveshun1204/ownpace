@@ -90,9 +90,9 @@
       </section>
       <section class="next-game" id="next-game">
         <div class="wrap next-layout">
-          <header class="next-heading">
-            <p class="eyebrow">NEXT GAME / SCHEDULE</p>
-            <h2>次のバスケ、<br />いつにする？</h2>
+          <header class="next-heading editor-heading">
+            <p class="editor-heading__en">NEXT GAME.</p>
+            <h2 class="editor-heading__jp">次のバスケ、<br />いつにする？</h2>
             <p class="copy muted">
               都合のいい日があったら、<br />一緒にやりましょう。
             </p>
@@ -257,6 +257,7 @@
               >OWN PACE / MEMBERSHIP</span
             >
           </section>
+          <div class="story-scroll-hint" aria-hidden="true"><span>SCROLL TO EXPLORE</span><svg viewBox="0 0 20 30" focusable="false"><path d="M10 1v26M3 20l7 7 7-7"/></svg></div>
           <nav class="story-controls" aria-label="ストーリーの切り替え">
             <button
               class="story-dot"
@@ -307,32 +308,12 @@
           </p></noscript
         >
       </div>
-      <section class="final-cta" id="final-cta">
-        <picture class=""
-          ><source
-            media="(max-width:720px)"
-            srcset="assets/img/common/backgrounds/night-768.webp" />
-          <img
-            src="assets/img/common/backgrounds/night-1536.webp"
-            alt=""
-            width="1536"
-            height="1024"
-            loading="lazy"
-            decoding="async"
-        /></picture>
-        <div class="wrap">
-          <p class="eyebrow reveal">AT YOUR OWN PACE</p>
-          <h2 class="reveal">SEE YOU<br />ON THE COURT.</h2>
+      <section class="final-cta" id="final-cta" aria-labelledby="final-title">
+        <div class="wrap final-cta-inner">
+          <div class="final-cta-rule reveal" aria-hidden="true"></div>
+          <h2 class="reveal" id="final-title">SEE YOU ON<br />THE COURT.</h2>
           <p class="cta-jp reveal">次のバスケで、会いましょう。</p>
-          <p class="copy reveal">バスケがしたくなったら、OWN PACEへ。</p>
-          <div class="reveal">
-            <a
-              class="button button--light"
-              href="schedule.html"
-              data-cta="final-schedule"
-              >開催日程を見る</a
-            >
-          </div>
+          <div class="cta-group reveal"><a class="button button--light editorial-cta" href="schedule.html" data-cta="final-schedule"><span class="cta-copy"><small>UPCOMING GAMES</small><strong>開催日程を見る</strong></span><span class="cta-arrow" aria-hidden="true">↗</span></a></div>
         </div>
       </section>
     </main>

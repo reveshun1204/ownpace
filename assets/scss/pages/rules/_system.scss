@@ -1,13 +1,13 @@
 // One editorial grid, one type scale, one surface for every RULES chapter.
 .rules-page {
   --rules-surface:#f0f2ed;
-  --rules-line:#1235422b;
+  --rules-line:#14243e2b;
   background:var(--rules-surface);
   .wrap {width:min(1180px,88%);}
   .chapter {padding:0;background:var(--rules-surface);}
   .chapter-inner {display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);gap:clamp(40px,6vw,88px);padding-block:76px;border-top:1px solid var(--rules-line);}
   .chapter-heading {position:sticky;top:calc(var(--header-height) + 34px);align-self:start;isolation:auto;}
-  .chapter-number {display:block;margin:0 0 22px;color:#12354245;font-family:var(--display);font-size:88px;font-weight:800;line-height:.86;letter-spacing:-.065em;font-variant-numeric:lining-nums tabular-nums;}
+  .chapter-number {display:block;margin:0 0 22px;color:#14243e45;font-family:var(--display);font-size:88px;font-weight:800;line-height:.86;letter-spacing:-.065em;font-variant-numeric:lining-nums tabular-nums;}
   .chapter-english,.chapter-kicker {font-size:12px;font-weight:700;letter-spacing:.12em;line-height:1.65;color:var(--muted);margin:0 0 12px;text-transform:uppercase;}
   .chapter-heading h2 {font-size:clamp(25px,2.5vw,35px);font-weight:650;line-height:1.55;letter-spacing:-.035em;margin:0;overflow-wrap:anywhere;}
   .chapter-body {min-width:0;}

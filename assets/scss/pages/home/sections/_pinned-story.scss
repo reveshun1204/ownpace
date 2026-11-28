@@ -1,6 +1,6 @@
 .pinned-story {
   position: relative;
-  background: #123542;
+  background: #14243e;
   color: #fff;
 }
 .story-stage {
@@ -32,9 +32,9 @@
   z-index: -2;
   background: linear-gradient(
     90deg,
-    #0c263be0 0%,
-    #0c263b7d 55%,
-    #0c263b35 100%
+    #14243ee0 0%,
+    #14243e7d 55%,
+    #14243e35 100%
   );
 }
 .scene-layout {
@@ -122,7 +122,7 @@
 }
 .story-dot[aria-pressed="true"] {
   background: #fff;
-  color: #123542;
+  color: #14243e;
 }
 .is-pinned .scene-image img {
   will-change: transform;
@@ -137,7 +137,7 @@
   color: #e4e8e4;
 }
 .story-scene--report {
-  background: #123542;
+  background: #14243e;
 }
 .story-scene--report .scene-shade {
   background: linear-gradient(115deg, #1e4956, #102e40);
@@ -191,7 +191,7 @@
     object-position: 65% center;
   }
   .scene-shade {
-    background: linear-gradient(90deg, #0c263bd9, #0c263b6b);
+    background: linear-gradient(90deg, #14243ed9, #14243e6b);
   }
   .is-pinned .story-stage {
     min-height: 570px;
@@ -254,7 +254,7 @@
  .scene-text p{font-size:15px;line-height:1.9;}
  .scene-text{width:100%;}
  .scene-text h2{font-size:clamp(27px,5.5vw,38px);}
- .scene-shade{background:linear-gradient(90deg,#0c263bef,#0c263b7d);}
+ .scene-shade{background:linear-gradient(90deg,#14243eef,#14243e7d);}
  .is-pinned .story-stage{min-height:600px;}
 }
 
@@ -276,3 +276,25 @@
  .is-native.is-compact .rank-preview {max-width:300px;}
  .is-native.is-compact .button {min-height:48px;padding:12px 18px;}
 }
+
+// Keep guidance away from the preserved 01–05 controls at the lower right.
+.story-scroll-hint{display:none;}
+.is-pinned .story-scroll-hint{display:flex;position:absolute;left:50%;bottom:22px;z-index:9;transform:translateX(-50%);flex-direction:column;align-items:center;gap:9px;pointer-events:none;color:#fff;opacity:.8;transition:opacity .4s;}
+.story-scroll-hint span{font-size:10px;letter-spacing:.18em;white-space:nowrap;}
+.story-scroll-hint svg{width:14px;height:24px;fill:none;stroke:currentColor;stroke-width:1;animation:story-hint-drift 2.8s ease-in-out infinite;}
+.is-pinned.is-last-scene .story-scroll-hint{opacity:0;visibility:hidden;}
+@keyframes story-hint-drift{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
+@media(max-width:720px){
+ .is-native .story-scene{padding-bottom:calc(108px + env(safe-area-inset-bottom,0px));}
+ .is-native .story-controls{right:5%;bottom:calc(13px + env(safe-area-inset-bottom,0px));}
+ .is-native .story-scroll-hint{bottom:calc(64px + env(safe-area-inset-bottom,0px));gap:5px;}
+ .is-native .story-scroll-hint span{font-size:9px;}
+ .is-native .story-scroll-hint svg{height:20px;}
+ // Last panel needs room for the larger 3+2 rank arrangement. The native
+ // controller falls back to normal scrolling if that complete content cannot fit.
+ .is-native.is-compact .rank-preview{max-width:300px;gap:10px;}
+ .is-native.is-compact #membership .scene-text h2{font-size:24px;}
+ .is-native.is-compact #membership .scene-text p{font-size:13px;line-height:1.65;}
+}
+@media(prefers-reduced-motion:reduce){.story-scroll-hint svg{animation:none}.story-scroll-hint{transition:none;}}
+@media(max-width:720px){.is-native .story-scene--membership{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}}

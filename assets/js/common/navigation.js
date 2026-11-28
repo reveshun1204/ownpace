@@ -3,6 +3,10 @@ export function initNavigation() {
   const dialog = document.getElementById("site-nav");
   const open = document.getElementById("menu-open");
   const close = document.getElementById("menu-close");
+  for(const [button,label] of [[open,'メニューを開く'],[close,'メニューを閉じる']]){
+    const icon=document.createElement('span');icon.className='menu-icon';icon.setAttribute('aria-hidden','true');icon.append(document.createElement('span'));
+    button.replaceChildren(icon);button.setAttribute('aria-label',label);
+  }
   if (typeof dialog.showModal === "function") {
     open.hidden = false;
     open.addEventListener("click", () => {

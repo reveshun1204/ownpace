@@ -24,6 +24,7 @@ export default async function init() {
     timeline = null;
     trigger = null;
     active = -1;
+    root.classList.remove("is-last-scene");
   }
   function activate(index) {
     if (index === active) return;
@@ -31,6 +32,7 @@ export default async function init() {
       (scene, i) => i !== index && scene.contains(document.activeElement),
     );
     active = index;
+    root.classList.toggle("is-last-scene",index === scenes.length - 1);
     scenes.forEach((scene, i) => {
       scene.classList.toggle("is-active", i === index);
       scene.inert = i !== index;

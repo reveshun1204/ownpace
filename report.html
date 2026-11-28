@@ -73,6 +73,7 @@
     </dialog>
     <main id="main">
       <section class="sub-hero" id="hero">
+        <picture class="sub-hero-image"><img src="assets/img/headings/report.webp" alt="" width="1983" height="595" fetchpriority="high" decoding="async"></picture>
         <div class="wrap">
           <p class="eyebrow">OWN PACE / 活動レポート</p>
           <h1>OUR STORIES.</h1>
@@ -82,8 +83,7 @@
       <section class="report-empty" id="empty">
         <div class="wrap">
           <div class="empty-frame reveal">
-            <p class="eyebrow">ACTIVITY REPORT / COMING SOON</p>
-            <h2>はじめの一枚は、<br />これから。</h2>
+            <header class="editor-heading"><p class="editor-heading__en">OUR NEXT CHAPTER.</p><h2 class="editor-heading__jp">はじめの一枚は、<br />これから。</h2><p class="editor-heading__sub">COMING SOON</p></header>
             <div class="empty-rule" aria-hidden="true"></div>
             <p>
               活動レポートは、ただいま準備中です。<br />実際の活動の様子や、コートでの時間を<br />少しずつお届けしていきます。
@@ -104,17 +104,12 @@
           </p>
         </div>
       </section>
-      <section class="sub-ending" id="ending">
-        <div class="wrap">
-          <p class="eyebrow reveal">AT YOUR OWN PACE</p>
-          <h2 class="reveal">SEE YOU ON THE COURT.</h2>
-          <p class="reveal">次のバスケで、会いましょう。</p>
-          <a
-            class="button button--light"
-            href="schedule.html"
-            data-cta="schedule"
-            >開催日程を見る</a
-          >
+      <section class="final-cta" id="ending" aria-labelledby="final-title">
+        <div class="wrap final-cta-inner">
+          <div class="final-cta-rule reveal" aria-hidden="true"></div>
+          <h2 class="reveal" id="final-title">SEE YOU ON<br />THE COURT.</h2>
+          <p class="cta-jp reveal">次のバスケで、会いましょう。</p>
+          <div class="cta-group reveal"><a class="button button--light editorial-cta" href="schedule.html" data-cta="final-schedule"><span class="cta-copy"><small>UPCOMING GAMES</small><strong>開催日程を見る</strong></span><span class="cta-arrow" aria-hidden="true">↗</span></a></div>
         </div>
       </section>
     </main>

@@ -1,3 +1,4 @@
+import {initEditorialCtas,observeEditorialCtas} from './editorial.js';
 import { initHeader } from "./header.js";
 import { site } from "../config/site.js";
 import { initNavigation } from "./navigation.js";
@@ -8,6 +9,8 @@ export function initCommon() {
   initMotion();
   initNavigation();
   initCta();
+  initEditorialCtas();
+  observeEditorialCtas();
   document.documentElement.classList.add("motion-ready");
   if (site.logoUrl)
     document.querySelectorAll("[data-brand]").forEach((el) => {
