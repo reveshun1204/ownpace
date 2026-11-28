@@ -279,8 +279,8 @@
 
 // Keep guidance away from the preserved 01–05 controls at the lower right.
 .story-scroll-hint{display:none;}
-.is-pinned .story-scroll-hint{display:flex;position:absolute;left:50%;bottom:22px;z-index:9;transform:translateX(-50%);flex-direction:column;align-items:center;gap:9px;pointer-events:none;color:#fff;opacity:.8;transition:opacity .4s;}
-.story-scroll-hint span{font-size:10px;letter-spacing:.18em;white-space:nowrap;}
+.is-pinned .story-scroll-hint{display:flex;position:absolute;left:50%;bottom:22px;z-index:9;transform:translateX(-50%);flex-direction:column;align-items:center;gap:9px;pointer-events:none;color:#fff;opacity:1;transition:opacity .4s;}
+.story-scroll-hint span{font-size:13px;letter-spacing:.03em;white-space:nowrap;text-shadow:0 1px 5px #101b2d;}
 .story-scroll-hint svg{width:14px;height:24px;fill:none;stroke:currentColor;stroke-width:1;animation:story-hint-drift 2.8s ease-in-out infinite;}
 .is-pinned.is-last-scene .story-scroll-hint{opacity:0;visibility:hidden;}
 @keyframes story-hint-drift{0%,100%{transform:translateY(-3px)}50%{transform:translateY(4px)}}
@@ -288,7 +288,7 @@
  .is-native .story-scene{padding-bottom:calc(108px + env(safe-area-inset-bottom,0px));}
  .is-native .story-controls{right:5%;bottom:calc(13px + env(safe-area-inset-bottom,0px));}
  .is-native .story-scroll-hint{bottom:calc(64px + env(safe-area-inset-bottom,0px));gap:5px;}
- .is-native .story-scroll-hint span{font-size:9px;}
+ .is-native .story-scroll-hint span{font-size:13px;}
  .is-native .story-scroll-hint svg{height:20px;}
  // Last panel needs room for the larger 3+2 rank arrangement. The native
  // controller falls back to normal scrolling if that complete content cannot fit.
@@ -298,3 +298,5 @@
 }
 @media(prefers-reduced-motion:reduce){.story-scroll-hint svg{animation:none}.story-scroll-hint{transition:none;}}
 @media(max-width:720px){.is-native .story-scene--membership{padding-bottom:calc(56px + env(safe-area-inset-bottom,0px));}}
+
+.story-scroll-hint .scroll-label-mobile{display:none}@media(max-width:720px){.story-scroll-hint .scroll-label{display:none}.story-scroll-hint .scroll-label-mobile{display:inline}}

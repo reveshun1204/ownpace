@@ -13,3 +13,7 @@
 .member-ending.final-cta{background:#14243e}
 .member-ending.final-cta p{font-size:16px;margin-bottom:36px}
 @media(max-width:480px){.member-auth{padding:48px 0 64px}.member-register-link{margin-top:28px}.member-register-link>a{font-size:14px}.member-opening h1 span{letter-spacing:.18em}.member-header .member-button{max-width:165px}}
+
+// Keep the decorative ellipse inside the viewport, not the scrollable document.
+body::before{inset:15% 0 auto auto;width:40%;border-radius:100% 0 0 100%;border-right:0}
+@media(max-width:720px){.member-opening h1{font-size:clamp(42px,15vw,100px)}.member-header>*{min-width:0}.member-header .member-button{max-width:50%;overflow-wrap:anywhere}.rank-copy,.rank-ring,.member-navigation>*{min-width:0;max-width:100%}.member-navigation .tab-en,.member-navigation .tab-ja{overflow-wrap:anywhere}.history-pager{gap:8px;flex-wrap:wrap}.history-pager .member-button{min-width:0;padding-inline:14px}.member-profile .birth-select{grid-template-columns:repeat(2,minmax(0,1fr))}.birth-select select{min-width:0;max-width:100%}}

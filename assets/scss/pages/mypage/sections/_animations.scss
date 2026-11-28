@@ -12,3 +12,5 @@ body[data-rank=rookie] .rank-ring::after{content:'';position:absolute;inset:3%;b
 .rank-up[data-rank=allstar] .rank-up-logos::after{content:'';position:absolute;inset:15% 0;background:linear-gradient(110deg,transparent 30%,#d9e4f01a 49%,transparent 65%);animation:silver-light 1.8s .6s both;pointer-events:none}@keyframes silver-light{from{transform:translateX(-70%);opacity:0}50%{opacity:1}to{transform:translateX(70%);opacity:0}}
 .rank-up[data-rank=legend] [data-after]{filter:drop-shadow(0 0 24px #e1bb6766)}
 @media(prefers-reduced-motion:reduce){body[data-rank=rookie] .rank-ring::after{display:none}}
+
+.rank-up-logos{overflow:hidden}.rank-up-ring{max-width:calc(100% - 24px)}
