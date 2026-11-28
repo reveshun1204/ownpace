@@ -27,7 +27,10 @@ const home=await readFile(resolve(dist,'index.html'),'utf8');
 assert.equal([...home.matchAll(/data-story-scene/g)].length,5,'five pinned scenes');
 assert(!home.includes('class="faq-question"'),'HOME FAQ removed');
 assert(!home.includes('id="faq"'),'HOME FAQ anchor removed');
-assert(home.includes('SCROLL TO EXPLORE'),'scroll invitation retained');
+for (const label of ['下にスクロールして続きを見る', '上にスワイプして続きを見る']) {
+  assert(home.includes(label), `scroll invitation retained: ${label}`);
+}
+assert(!home.includes('SCROLL TO EXPLORE'), 'old English scroll invitation removed');
 assert(home.includes('id="next-game-card"'),'dynamic next game mount');
 const schedule=await readFile(resolve(dist,'schedule.html'),'utf8');
 assert(schedule.includes('mode=MONTH')&&schedule.includes('Asia%2FTokyo'),'JST initial month');
