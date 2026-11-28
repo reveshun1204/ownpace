@@ -1,4 +1,5 @@
 import { initSection } from "../../../common/reveal.js";
 export default function init() {
   initSection("guide");
+  initSection("rank-rewards");
 }

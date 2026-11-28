@@ -122,3 +122,12 @@
     font-size: 32px;
   }
 }
+
+.game-card { min-width:0; }
+.game-card .game-venue,.game-card .game-court {overflow-wrap:anywhere;}
+.game-card .button-row { display:flex;flex-wrap:wrap;gap:16px;align-items:center; }
+.game-card .button--disabled { opacity:.55;cursor:default;pointer-events:none; }
+.game-card .game-status { font-size:14px; }
+.game-card .game-meta dt {font-size:12px;}
+.game-card .game-meta dd {font-size:16px;}
+.game-card [data-events-retry] {margin-right:18px;}

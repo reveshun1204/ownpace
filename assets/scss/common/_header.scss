@@ -221,3 +221,22 @@ body.menu-lock {
  .site-header .brand { width: clamp(135px, 37vw, 185px); max-width:none; }
  .site-header .brand img { width:100%; height:auto; max-height:none; max-width:none; }
 }
+
+// Reserve the desktop controls slot so nav/MENU swaps never move the brand.
+.site-header .header-links { transition: opacity 240ms ease, visibility 240ms ease; }
+.site-header .menu-open { visibility: hidden; pointer-events: none; opacity: 0; min-height:44px; transition: opacity 240ms ease, visibility 240ms ease; }
+.site-header.is-compact .header-links { visibility:hidden; pointer-events:none; opacity:0; }
+.site-header.is-compact .menu-open { visibility:visible; pointer-events:auto; opacity:1; }
+.social-instagram { display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:8px 0;color:inherit;text-decoration:none;transition:color 240ms ease; }
+.social-instagram .fa-instagram { font-size:23px;line-height:1; }
+.social-instagram span { font-family:inherit;font-size:12px;font-weight:600;letter-spacing:.12em; }
+.social-instagram:hover,.social-instagram:focus-visible { color:var(--orange); }
+.social-instagram:focus-visible {outline:2px solid currentColor;outline-offset:5px;}
+.site-nav .social-instagram {margin-top:24px;}
+@media(max-width:1100px) {
+  .site-header .header-links { display:none; }
+  .site-header .menu-open { visibility:visible;pointer-events:auto;opacity:1; }
+}
+@media(prefers-reduced-motion:reduce) {
+  .site-header .header-links,.site-header .menu-open,.social-instagram {transition:none;}
+}

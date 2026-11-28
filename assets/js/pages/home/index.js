@@ -6,7 +6,6 @@ import section3 from "./sections/join.js";
 import section4 from "./sections/rules.js";
 import section5 from "./sections/report.js";
 import section6 from "./sections/membership.js";
-import section7 from "./sections/faq.js";
 import section8 from "./sections/final-cta.js";
 import initPinnedStory from "./sections/pinned-story.js";
 
@@ -18,6 +17,5 @@ section3();
 section4();
 section5();
 section6();
-section7();
 section8();
 initPinnedStory();

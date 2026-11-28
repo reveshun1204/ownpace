@@ -1,121 +1,45 @@
-.rank-guide {
-  padding: 75px 0;
-  background: #fff;
-}
-.rank-guide .section-title {
-  margin: 20px 0 25px;
-}
-.rank-route {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 9px;
-  margin: 28px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.rank-route a {
-  display: block;
-  padding: 9px 12px;
-  border: 1px solid var(--line);
-  font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-decoration: none;
-}
-.rank-stage {
-  padding: 80px 0;
-  --rank: #123542;
-  scroll-margin-top: var(--header-height);
-}
-.rank-stage-inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 7%;
-  align-items: center;
-}
-.rank-stage .eyebrow {
-  color: var(--rank);
-}
-.rank-stage h2 {
-  font-size: clamp(45px, 6vw, 85px);
-  font-weight: 500;
-  letter-spacing: -0.035em;
-  margin: 15px 0;
-  line-height: 1.15;
-}
-.rank-stage p:last-child {
-  font-size: 13px;
-  line-height: 2;
-}
-.rank-milestone {
-  display: flex;
-  align-items: baseline;
-  justify-content: flex-end;
-  gap: 15px;
-  color: var(--rank);
-  white-space: nowrap;
-}
-.rank-milestone strong {
-  font-size: clamp(100px, 15vw, 195px);
-  font-weight: 500;
-  line-height: 1;
-  letter-spacing: -0.06em;
-  font-variant-numeric: tabular-nums;
-}
-.rank-milestone small {
-  font-size: 12px;
+// Shared visual grammar for every rank: emblem / description / attendance milestone.
+.rank-guide { padding: clamp(64px, 8vw, 112px) 0; background: var(--paper); }
+.rank-guide .section-title { margin: 20px 0 25px; }
+.rank-route { display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 0; padding: 0; list-style: none; }
+.rank-route a { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 12px 16px; border: 1px solid var(--line); font-size: 14px; font-weight: 600; letter-spacing: .04em; text-decoration: none; transition: background-color .3s, color .3s, border-color .3s; }
+.rank-route a:hover, .rank-route a:focus-visible { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.rank-page .rank-stage { position: relative; isolation: isolate; padding: clamp(64px, 8vw, 120px) 0; border-bottom: 1px solid #26323a20; scroll-margin-top: var(--header-height); }
+.rank-page .rank-stage-inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr) minmax(110px, .4fr); gap: clamp(20px, 3vw, 54px); align-items: center; }
+.rank-page .rank-stage .eyebrow { color: var(--rank); }
+.rank-page .rank-stage h2 { margin: 16px 0; font-size: clamp(38px, 5.2vw, 78px); line-height: 1; letter-spacing: -.055em; overflow-wrap: normal; }
+.rank-page .rank-stage p { font-size: 16px; line-height: 1.95; }
+.rank-page .rank-stage .rank-range { color: var(--rank); font-size: 14px; font-weight: 600; letter-spacing: .06em; }
+.rank-page .rank-tagline { margin-top: 28px; font-weight: 600; }
+.rank-page .rank-benefit { max-width: 32em; margin-top: 16px; }
+.rank-page .rank-emblem { position: relative; aspect-ratio: 1; min-width: 0; width: 100%; margin: 0; overflow: hidden; }
+// Supplied PNGs contain generous transparent padding; only that padding falls outside this frame.
+.rank-page .rank-stage .rank-emblem img { position: absolute; left: 50%; top: 50%; display: block; width: 185%; max-width: none; height: auto; transform: translate(-50%, -50%); object-fit: contain; filter: drop-shadow(0 12px 18px var(--rank-glow)); }
+.rank-page .rank-milestone { display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 12px; color: var(--rank); }
+.rank-page .rank-milestone strong { font-size: clamp(72px, 8vw, 130px); line-height: 1; font-weight: 500; letter-spacing: -.06em; font-variant-numeric: tabular-nums; }
+.rank-page .rank-milestone small { font-size: 14px; white-space: nowrap; }
+.rank-notes { padding: clamp(64px, 8vw, 110px) 0; background: var(--paper); }
+.rank-notes .wrap { max-width: 920px; }
+.rank-notes h2 { margin: 24px 0; font-size: clamp(25px, 4vw, 38px); }
+.rank-notes p { font-size: 16px; line-height: 2; }
+.rank-notes p + p { margin-top: 18px; }
+.rank-notes .button { margin-top: 32px; }
+@media (max-width: 1000px) {
+ .rank-page .rank-stage-inner { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); column-gap: 36px; }
+ .rank-page .rank-emblem { grid-row: 1 / 3; }
+ .rank-page .rank-milestone { grid-column: 2; align-items: baseline; flex-direction: row; justify-content: flex-start; }
+ .rank-page .rank-milestone strong { font-size: 72px; }
 }
 @media (max-width: 720px) {
-  .rank-guide {
-    padding: 55px 0;
-  }
-  .rank-stage {
-    padding: 55px 0;
-  }
-  .rank-stage-inner {
-    display: block;
-  }
-  .rank-stage h2 {
-    font-size: 47px;
-  }
-  .rank-milestone {
-    justify-content: flex-start;
-    margin-top: 30px;
-  }
-  .rank-milestone strong {
-    font-size: 120px;
-  }
+ .rank-page .rank-stage-inner { grid-template-columns: minmax(0, 1fr); gap: 26px; }
+ .rank-page .rank-emblem { grid-row: auto; width: min(100%, 340px); justify-self: center; }
+ .rank-page .rank-description { width: 100%; }
+ .rank-page .rank-stage h2 { font-size: clamp(40px, 12vw, 64px); }
+ .rank-page .rank-stage .rank-range { font-size: 15px; }
+ .rank-page .rank-milestone { grid-column: 1; padding-top: 26px; border-top: 1px solid currentColor; width: 100%; align-items: baseline; justify-content: flex-start; gap: 20px; }
+ .rank-page .rank-milestone strong { font-size: 80px; }
+ .rank-page .rank-milestone small { font-size: 14px; }
 }
-
-
-.rank-stage-inner{grid-template-columns:minmax(190px,.9fr) minmax(230px,1.2fr) minmax(140px,.7fr);gap:4%;}
-.rank-stage h2{font-family:var(--display);font-weight:900;font-size:clamp(35px,5vw,72px);letter-spacing:-.055em;}
-.rank-emblem{margin:0;}
-.rank-emblem img{width:100%;max-width:360px;aspect-ratio:1;object-fit:contain;margin:auto;filter:drop-shadow(0 16px 12px #12354220);transition:transform .5s;}
-.rank-emblem:hover img{transform:translateY(-6px) rotate(-3deg);}
-.rank-stage .rank-milestone {flex-wrap:wrap;gap:8px;justify-content:center;text-align:center;}
-.rank-stage .rank-milestone strong{font-size:clamp(76px,9vw,140px);font-weight:900;}
-.rank-stage .rank-milestone small{font-size:14px;width:100%;}
-#rookie .rank-stage-inner{grid-template-columns:1fr 1fr;}
-#rookie .rank-milestone {justify-content:flex-end;}
-#rookie .rank-milestone small{width:auto;}
-#legend .rank-emblem{order:2;} #legend .rank-milestone{order:3;}
-@media(max-width:900px){
- .rank-stage-inner{grid-template-columns:minmax(130px,.8fr) minmax(180px,1.2fr);gap:5%;}
- .rank-milestone{grid-column:2;}.rank-emblem{grid-row:1/3;}
- #legend .rank-emblem{order:0;grid-row:1/3;}
- #legend .rank-milestone{order:0;}
+@media (prefers-reduced-motion: reduce) {
+ .rank-route a { transition: none; }
 }
-@media(max-width:720px){
- .rank-stage-inner{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
- .rank-emblem{grid-row:auto;grid-column:1/-1;}
- .rank-emblem img{width:240px;max-width:85%;}
- .rank-stage h2{font-size:clamp(28px,7vw,46px);margin-block:10px;}
- .rank-stage .rank-milestone{grid-column:2;margin-top:0;align-self:center;}
- .rank-stage .rank-milestone strong{font-size:72px;}
- #legend .rank-emblem{grid-row:auto;}
- #rookie .rank-stage-inner{grid-template-columns:1fr 1fr;}
- #rookie .rank-milestone{flex-direction:column;align-items:flex-end;}
- .rank-stage p:last-child{font-size:14px;}
-}
-
