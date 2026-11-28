@@ -1,0 +1,133 @@
+.next-game {
+  padding: 85px 0;
+  background: var(--paper);
+}
+.next-layout {
+  display: grid;
+  grid-template-columns: 0.8fr 1.2fr;
+  gap: 8%;
+  align-items: start;
+}
+.next-heading h2 {
+  font-size: clamp(29px, 3.2vw, 47px);
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: -0.035em;
+  margin: 18px 0;
+}
+.next-heading .eyebrow {
+  color: var(--muted);
+}
+.game-card {
+  border-top: 1px solid var(--ink);
+  padding-top: 25px;
+}
+.game-date {
+  font-size: clamp(31px, 3.6vw, 49px);
+  font-weight: 500;
+  letter-spacing: -0.04em;
+  line-height: 1.4;
+  margin: 0 0 16px;
+  font-variant-numeric: tabular-nums;
+}
+.game-date small {
+  font-size: 14px;
+  margin-left: 10px;
+  letter-spacing: 0.02em;
+}
+.game-time {
+  font-size: 15px;
+  letter-spacing: 0.06em;
+}
+.game-venue {
+  font-size: 19px;
+  font-weight: 600;
+  margin: 22px 0 8px;
+}
+.game-court {
+  font-size: 12px;
+  line-height: 1.9;
+  color: var(--muted);
+  margin-bottom: 23px;
+}
+.game-meta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 0 0 24px;
+  padding: 20px 0;
+  border-block: 1px solid var(--line);
+  gap: 15px;
+}
+.game-meta div {
+  display: grid;
+  gap: 9px;
+}
+.game-meta dt {
+  font-size: 10px;
+  color: var(--muted);
+}
+.game-meta dd {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+.game-status {
+  font-size: 11px;
+  color: var(--muted);
+  line-height: 1.9;
+}
+.game-card .button-row {
+  margin-top: 25px;
+}
+.game-meta dd small {
+  font-size: 10px;
+  font-weight: 400;
+}
+.game-empty {
+  font-size: 14px;
+  line-height: 2.2;
+  padding-block: 25px;
+}
+@media (max-width: 720px) {
+  .next-game {
+    padding: 55px 0;
+  }
+  .next-layout {
+    display: block;
+  }
+  .next-heading {
+    margin-bottom: 30px;
+  }
+  .next-heading h2 {
+    font-size: 29px;
+  }
+  .game-date {
+    font-size: 35px;
+  }
+  .game-venue {
+    font-size: 18px;
+  }
+  .game-meta {
+    gap: 12px;
+  }
+  .game-meta dd {
+    font-size: 13px;
+  }
+  .game-meta dt {
+    font-size: 9px;
+  }
+}
+@media (max-width: 480px) {
+  .game-date {
+    font-size: 32px;
+  }
+}
+
+.game-card { min-width:0; }
+.game-card .game-venue,.game-card .game-court {overflow-wrap:anywhere;}
+.game-card .button-row { display:flex;flex-wrap:wrap;gap:16px;align-items:center; }
+.game-card .button--disabled { opacity:.55;cursor:default;pointer-events:none; }
+.game-card .game-status { font-size:14px; }
+.game-card .game-meta dt {font-size:12px;}
+.game-card .game-meta dd {font-size:16px;}
+.game-card [data-events-retry] {margin-right:18px;}

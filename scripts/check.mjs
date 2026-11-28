@@ -3,7 +3,7 @@ import { resolve, dirname } from 'node:path';
 import assert from 'node:assert/strict';
 const root=resolve(import.meta.dirname,'..');
 const dist=resolve(root,'dist');
-const pages=['index.html','schedule.html','rules.html','rank.html','report.html','reservation/index.html','admin/index.html','privacy/index.html','terms/index.html'];
+const pages=['index.html','schedule.html','rules.html','rank.html','report.html','reservation/index.html','admin/index.html','mypage/index.html','privacy/index.html','terms/index.html'];
 const exists=async p=>{try{return(await stat(p)).isFile()}catch{return false}};
 const localFile=async path=>{try{if((await stat(path)).isDirectory())return resolve(path,'index.html')}catch{}return path};
 for(const file of pages){
@@ -25,16 +25,17 @@ for(const file of pages){
 }
 const home=await readFile(resolve(dist,'index.html'),'utf8');
 assert.equal([...home.matchAll(/data-story-scene/g)].length,5,'five pinned scenes');
-assert.equal([...home.matchAll(/class="faq-question"/g)].length,12,'12 FAQ items');
-assert.equal([...home.matchAll(/aria-expanded="false"\s+aria-controls="answer-/g)].length,12,'FAQ starts closed');
-assert(home.indexOf('id="final-cta"')>home.indexOf('id="faq"'),'final CTA is last');
+assert(!home.includes('class="faq-question"'),'HOME FAQ removed');
+assert(!home.includes('id="faq"'),'HOME FAQ anchor removed');
+assert(home.includes('SCROLL TO EXPLORE'),'scroll invitation retained');
+assert(home.includes('id="next-game-card"'),'dynamic next game mount');
 const schedule=await readFile(resolve(dist,'schedule.html'),'utf8');
 assert(schedule.includes('mode=MONTH')&&schedule.includes('Asia%2FTokyo'),'JST initial month');
 const rank=await readFile(resolve(dist,'rank.html'),'utf8');
-for(const name of ['REGULAR','ALLSTAR','LEGEND','GOAT'])assert(rank.includes(name),'rank '+name);
-assert(rank.includes('ランク特典'), 'rank benefits should be mentioned');
+for(const name of ['ROOKIE','REGULAR','ALLSTAR','LEGEND','GOAT'])assert(rank.includes(name),'rank '+name);
+assert(rank.includes('誕生月'), 'rank benefits should be mentioned');
 // Verify each rank section contains a benefit notice without depending on attribute order.
-for (const name of ['regular','allstar','legend','goat']) {
+for (const name of ['rookie','regular','allstar','legend','goat']) {
   const opening = new RegExp(`<section\\b[^>]*\\bid=["']${name}["'][^>]*>`, 'i');
   const match = opening.exec(rank);
   assert(match, `${name}: rank section missing`);
@@ -52,3 +53,9 @@ const reservation=await readFile(resolve(dist,'reservation/index.html'),'utf8');
 assert(reservation.includes('reservation-member.js?v='));
 assert(!reservation.includes('試作版'));
 assert(await exists(resolve(dist,'assets/css/legal.css')));
+
+const my=await readFile(resolve(dist,'mypage/index.html'),'utf8');
+assert(my.includes('MY COUPONS')&&my.includes('rank-ring'),'independent member page');
+
+assert(!reservation.includes('id="my-page"'),'inline my page removed');
+assert(reservation.includes('../mypage/'),'reservation to mypage link');

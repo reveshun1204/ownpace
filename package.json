@@ -10,7 +10,7 @@
     "build": "node scripts/build.mjs",
     "dev": "node scripts/dev.mjs",
     "check": "node scripts/check.mjs",
-    "test": "node scripts/test-demo.mjs"
+    "test": "node scripts/test-demo.mjs && node scripts/test-members.mjs && node backend-changes/tests/public-events.test.mjs"
   },
   "devDependencies": {
     "sass": "1.108.2",

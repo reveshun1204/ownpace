@@ -6,20 +6,20 @@
     <meta name="theme-color" content="#123542" />
     <meta
       name="description"
-      content="OWN PACEの参加回数に応じたランク。REGULAR 5回、ALLSTAR 10回、LEGEND 25回、GOAT 50回。"
+      content="OWN PACEの参加実績でステップアップ。ROOKIEからREGULAR、ALLSTAR、LEGEND、GOATへ。参加条件とランク特典をご案内します。"
     />
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="OWN PACE" />
     <meta property="og:title" content="ランクガイド | OWN PACE" />
     <meta
       property="og:description"
-      content="OWN PACEの参加回数に応じたランク。REGULAR 5回、ALLSTAR 10回、LEGEND 25回、GOAT 50回。"
+      content="OWN PACEの参加実績でステップアップ。ROOKIEからREGULAR、ALLSTAR、LEGEND、GOATへ。参加条件とランク特典をご案内します。"
     />
     <meta name="twitter:card" content="summary_large_image" />
     <title>ランクガイド | OWN PACE</title>
     <link rel="stylesheet" href="assets/css/rank.css" />
   <link rel="stylesheet" href="assets/css/editorial.css" />
-  </head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" referrerpolicy="no-referrer"></head>
   <body class="rank-page" id="page-top">
     <a class="skip-link" href="#main">本文へスキップ</a>
     <header class="site-header">
@@ -62,6 +62,7 @@
             ><strong>RANK</strong><small>ランクガイド</small></a
           >
         </nav>
+        <a class="social-instagram" href="https://www.instagram.com/ownpace_/" target="_blank" rel="noopener noreferrer" aria-label="OWN PACEのInstagram（新しいタブで開きます）"><i class="fa-brands fa-instagram" aria-hidden="true"></i><span>INSTAGRAM</span></a>
         <p class="menu-foot">
           福岡で、自分のペースで。<br />TAKE IT EASY. PLAY YOUR GAME.
         </p>
@@ -91,7 +92,7 @@
           <p class="eyebrow reveal">ONE GAME AT A TIME</p>
           <h2 class="section-title reveal">来るたびに、<br />少しずつ。</h2>
           <p class="copy reveal">
-            OWN PACEでは、実際に参加した回数に応じてランクが上がります。<br />公式LINEのショップカードを登録してご参加ください。<br />参加回数に応じたランク特典も用意しています。特典の詳細は公式LINEでご案内します。
+            OWN PACEでは、実際に参加した回数に応じてランクが上がります。<br />予約した回数ではなく、管理者が出席登録した回数があなたの記録に。<br />今のランクや使える特典は、MY PAGEから確認できます。
           </p>
           <ul class="rank-route">
             <li><a href="#rookie">ROOKIE</a></li>
@@ -102,68 +103,79 @@
           </ul>
         </div>
       </section>
-      <section class="rank-stage" id="rookie">
+      <section class="rank-stage" id="rookie" aria-labelledby="rank-rookie-title">
         <div class="wrap rank-stage-inner">
-          <div class="reveal">
-            <p class="eyebrow">RANK 01</p>
-            <h2>ROOKIE</h2>
-            <p>参加回数：0〜4回</p>
+          <figure class="rank-emblem reveal"><img src="assets/img/rank/emblems/rank-rookie.png" alt="ブルーのROOKIEランクエンブレム" width="1024" height="1024" loading="lazy" decoding="async"></figure>
+          <div class="rank-description reveal">
+            <p class="eyebrow">YOUR FIRST GAME</p>
+            <h2 id="rank-rookie-title">ROOKIE</h2>
+            <p class="rank-range">参加回数：0〜4回</p>
+            <p class="rank-tagline">はじめての一歩。</p>
+            <p class="rank-benefit">ランク特典はまだありません。まずは、自分のペースで1回目のバスケへ。</p>
           </div>
-          <div class="rank-milestone reveal">
-            <strong>0</strong><small>回からスタート</small>
-          </div>
+          <div class="rank-milestone reveal"><strong>0</strong><small>回からスタート</small></div>
         </div>
       </section>
-      <section class="rank-stage" id="regular">
-        <div class="wrap rank-stage-inner"><figure class="rank-emblem reveal"><img src="assets/img/rank/regular/emblem.webp" alt="バスケットボールを中心にしたブルーグレーの盾" width="640" height="640" loading="lazy"></figure>
-          <div class="reveal">
-            <p class="eyebrow">RANK 02</p>
-            <h2>REGULAR</h2>
-            <p>参加回数：5〜9回</p>
-            <p class="rank-benefit">ランク特典あり。誕生月の参加特典などを予定しています。</p>
+      <section class="rank-stage" id="regular" aria-labelledby="rank-regular-title">
+        <div class="wrap rank-stage-inner">
+          <figure class="rank-emblem reveal"><img src="assets/img/rank/emblems/rank-regular.png" alt="レッドのREGULARランクエンブレム" width="1024" height="1024" loading="lazy" decoding="async"></figure>
+          <div class="rank-description reveal">
+            <p class="eyebrow">KEEP SHOWING UP</p>
+            <h2 id="rank-regular-title">REGULAR</h2>
+            <p class="rank-range">参加回数：5〜9回</p>
+            <p class="rank-tagline">いつものコートへ。</p>
+            <p class="rank-benefit">毎年、誕生月に1回無料。誕生日を登録すると、誕生月の末日まで利用できます。</p>
           </div>
-          <div class="rank-milestone reveal">
-            <strong>5</strong><small>回で到達</small>
-          </div>
+          <div class="rank-milestone reveal"><strong>5</strong><small>回で到達</small></div>
         </div>
       </section>
-      <section class="rank-stage" id="allstar">
-        <div class="wrap rank-stage-inner"><figure class="rank-emblem reveal"><img src="assets/img/rank/allstar/emblem.webp" alt="星とバスケットボールのシルバーの盾" width="640" height="640" loading="lazy"></figure>
-          <div class="reveal">
-            <p class="eyebrow">RANK 03</p>
-            <h2>ALLSTAR</h2>
-            <p>参加回数：10〜24回</p>
-            <p class="rank-benefit">ランク特典あり。参加無料特典などを予定しています。</p>
+      <section class="rank-stage" id="allstar" aria-labelledby="rank-allstar-title">
+        <div class="wrap rank-stage-inner">
+          <figure class="rank-emblem reveal"><img src="assets/img/rank/emblems/rank-allstar.png" alt="シルバーのALLSTARランクエンブレム" width="1024" height="1024" loading="lazy" decoding="async"></figure>
+          <div class="rank-description reveal">
+            <p class="eyebrow">KEEP SHOWING UP</p>
+            <h2 id="rank-allstar-title">ALLSTAR</h2>
+            <p class="rank-range">参加回数：10〜24回</p>
+            <p class="rank-tagline">ここから、さらに。</p>
+            <p class="rank-benefit">到達時に無料券を1枚発行。REGULARからの誕生月特典も続きます。</p>
           </div>
-          <div class="rank-milestone reveal">
-            <strong>10</strong><small>回で到達</small>
-          </div>
+          <div class="rank-milestone reveal"><strong>10</strong><small>回で到達</small></div>
         </div>
       </section>
-      <section class="rank-stage" id="legend">
-        <div class="wrap rank-stage-inner"><figure class="rank-emblem reveal"><img src="assets/img/rank/legend/emblem.webp" alt="王冠とトロフィーのゴールドの盾" width="640" height="640" loading="lazy"></figure>
-          <div class="reveal">
-            <p class="eyebrow">RANK 04</p>
-            <h2>LEGEND</h2>
-            <p>参加回数：25〜49回</p>
-            <p class="rank-benefit">ランク特典あり。参加無料特典などを予定しています。</p>
+      <section class="rank-stage" id="legend" aria-labelledby="rank-legend-title">
+        <div class="wrap rank-stage-inner">
+          <figure class="rank-emblem reveal"><img src="assets/img/rank/emblems/rank-legend.png" alt="ゴールドのLEGENDランクエンブレム" width="1024" height="1024" loading="lazy" decoding="async"></figure>
+          <div class="rank-description reveal">
+            <p class="eyebrow">KEEP SHOWING UP</p>
+            <h2 id="rank-legend-title">LEGEND</h2>
+            <p class="rank-range">参加回数：25〜49回</p>
+            <p class="rank-tagline">積み重ねた時間が、形に。</p>
+            <p class="rank-benefit">到達時に無料券を2枚追加。ランク到達での累計発行は3枚に。誕生月特典も続きます。</p>
           </div>
-          <div class="rank-milestone reveal">
-            <strong>25</strong><small>回で到達</small>
-          </div>
+          <div class="rank-milestone reveal"><strong>25</strong><small>回で到達</small></div>
         </div>
       </section>
-      <section class="rank-stage" id="goat">
-        <div class="wrap rank-stage-inner"><figure class="rank-emblem reveal"><img src="assets/img/rank/goat/emblem.webp" alt="角とひげを持つヤギのブラックとゴールドの盾" width="640" height="640" loading="lazy"></figure>
-          <div class="reveal">
-            <p class="eyebrow">RANK 05</p>
-            <h2>GOAT</h2>
-            <p>参加回数：50回〜</p>
-            <p class="rank-benefit">最上位ランク限定の特典を予定しています。</p>
+      <section class="rank-stage" id="goat" aria-labelledby="rank-goat-title">
+        <div class="wrap rank-stage-inner">
+          <figure class="rank-emblem reveal"><img src="assets/img/rank/emblems/rank-goat.png" alt="ガンメタルブラックのGOATランクエンブレム" width="1024" height="1024" loading="lazy" decoding="async"></figure>
+          <div class="rank-description reveal">
+            <p class="eyebrow">THE HIGHEST RANK</p>
+            <h2 id="rank-goat-title">GOAT</h2>
+            <p class="rank-range">参加回数：50回以上</p>
+            <p class="rank-tagline">その先も、OWN PACEで。</p>
+            <p class="rank-benefit">到達時に無料券を3枚追加。ランク到達での累計発行は6枚に。誕生月特典も続きます。</p>
           </div>
-          <div class="rank-milestone reveal">
-            <strong>50</strong><small>回で到達</small>
-          </div>
+          <div class="rank-milestone reveal"><strong>50</strong><small>回で到達</small></div>
+        </div>
+      </section>
+      <section class="rank-notes" id="rank-rewards" aria-labelledby="rank-notes-title">
+        <div class="wrap">
+          <p class="eyebrow reveal">YOUR REWARDS</p>
+          <h2 id="rank-notes-title" class="reveal">特典について</h2>
+          <p class="reveal">ランク無料券に有効期限はありません。誕生月特典は、その月の末日まで有効です。上位ランクでも誕生月特典は継続します。</p>
+          <p class="reveal">無料券の枚数は各ランク到達時の新規発行枚数です。実際に使える枚数は、使用・取り消し・有効期限・利用条件を反映したMY PAGEの表示をご確認ください。</p>
+          <p class="reveal">無料参加も参加回数に含まれます。出席記録が取り消された場合は、参加回数やランクに反映されます。</p>
+          <a class="button button--solid" href="mypage/">MY PAGEで確認する</a>
         </div>
       </section>
       <section class="sub-ending" id="ending">
@@ -198,7 +210,7 @@
               href="https://www.instagram.com/ownpace_/"
               target="_blank"
               rel="noopener noreferrer"
-              >INSTAGRAM ↗</a
+              ><i class="fa-brands fa-instagram" aria-hidden="true"></i><span>INSTAGRAM</span></a
             >
           </nav>
         </div>

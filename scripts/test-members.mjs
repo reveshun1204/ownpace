@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {createLineSession,ApiError} from '../assets/js/member/auth.js';
+import {rankProgress,rankName} from '../assets/js/member/rank.js';
+import {couponMarkup} from '../assets/js/member/mypage-view.js';
+import {normalizeEvents,eventCard,fetchPublicEvents} from '../assets/js/public/events.js';
+for(const [n,name,left,progress] of [[0,'ROOKIE',5,0],[4,'ROOKIE',1,.8],[5,'REGULAR',5,0],[9,'REGULAR',1,.8],[10,'ALLSTAR',15,0],[18,'ALLSTAR',7,8/15],[24,'ALLSTAR',1,14/15],[25,'LEGEND',25,0],[49,'LEGEND',1,24/25],[50,'GOAT',0,1],[51,'GOAT',0,1]]){
+ const r=rankProgress(n);assert.equal(r.rank.name,name);assert.equal(r.remaining,left);assert(Math.abs(r.progress-progress)<1e-9);
+}
+assert.equal(rankName('MEMBER'),'ROOKIE');
+let initCount=0,logoutCount=0,requests=0,prompts=0,logged=true;
+const sdk={init:async()=>{initCount++},isInClient:()=>false,isLoggedIn:()=>logged,getIDToken:()=>logged?'synthetic-test-token':null,logout:()=>{logoutCount++;logged=false},login:()=>{}};
+const session=createLineSession({liffId:'test',sdk,fetcher:async()=>{requests++;return {status:401,ok:false,json:async()=>({error:'Invalid LINE token'})}},onAuthRequired:()=>{prompts++}});
+assert(await session.start());await assert.rejects(session.request('profile'),e=>e instanceof ApiError&&e.kind==='auth');
+assert.equal(requests,1,'never automatically replay a request');assert.equal(logoutCount,1);assert.equal(prompts,1);
+await assert.rejects(session.request('book'),e=>e.kind==='auth');assert.equal(requests,1,'no member API without authentication');
+const unconfigured=createLineSession({liffId:null,sdk});await assert.rejects(unconfigured.start(),e=>e.kind==='config');assert.equal(initCount,1,'no guessed LIFF init');
+logged=true;const network=createLineSession({liffId:'test',sdk,fetcher:async()=>{throw new Error('synthetic')}});await network.start();await assert.rejects(network.request('profile'),e=>e.kind==='network');assert.equal(logoutCount,1,'network error does not invalidate auth');
+const secret={id:'event',title:'競技場 1/2B面',venue:'体育館<script>',starts_at:'2099-02-17T20:00:00+09:00',ends_at:'2099-02-17T22:00:00+09:00',capacity:18,fee:300,status:'open',confirmed_count:19,remaining:-1,participants:[{nickname:'private'}],line_user_id:'private'};
+const clean=normalizeEvents([secret]);assert.equal(clean[0].remaining,0);assert(!('participants' in clean[0]));assert(!('line_user_id' in clean[0]));
+assert(eventCard(clean[0]).includes('キャンセル待ち'));assert(eventCard(clean[0]).includes('&lt;script&gt;'));assert(!eventCard({...clean[0],status:'closed'}).includes('href="https://liff'));
+assert.deepEqual(normalizeEvents([{...secret,status:'draft'},{...secret,status:'cancelled'},{...secret,ends_at:'2000-01-01T22:00:00+09:00',starts_at:'2000-01-01T20:00:00+09:00'}]),[]);
+let options;const originalFetch=globalThis.fetch;
+globalThis.fetch=async(_url,opts)=>{options=opts;return {ok:true,json:async()=>({success:true,events:[secret]})}};
+assert.equal((await fetchPublicEvents())[0].remaining,0);assert.equal(options.cache,'no-store');assert.equal(options.credentials,'omit');assert(!('Authorization' in options.headers));
+globalThis.fetch=originalFetch;
+const coupons=couponMarkup({attendance_count:18,rewards:[{id:'a',reward_type:'allstar',remaining:1,quantity:1,available:true,expires_on:null},{id:'b',reward_type:'birthday',remaining:1,quantity:1,available:false,expires_on:'2000-01-31'}],active_redemptions:[]});
+assert(coupons.includes('期限切れ'));assert(coupons.includes('未解放'));assert(coupons.includes('<strong>1</strong>枚'));assert(couponMarkup({}).includes('取得できません'));
+const source=await readFile(new URL('../assets/js/member/auth.js',import.meta.url),'utf8');assert(!/console\.|localStorage|sessionStorage/.test(source.replace(/\/\/[^\n]*/g,'')),'no token logging/storage');
+console.log('OK rank boundaries/progress, auth expiry/no retry/no unauthenticated calls, public projection/status/escape, coupon states.');

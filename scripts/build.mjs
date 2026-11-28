@@ -10,7 +10,7 @@ const pages = ["home", "schedule", "rules", "rank", "report"];
 await rm(dist, { recursive: true, force: true });
 await mkdir(resolve(dist, "assets/css"), { recursive: true });
 await mkdir(resolve(root, "assets/css"), { recursive: true });
-for (const page of [...pages, "editorial", "booking-demo", "legal"]) {
+for (const page of [...pages, "editorial", "booking-demo", "legal", "mypage"]) {
   const { css } = compile(resolve(root, `assets/scss/${page}.scss`), {
     style: "compressed",
   });
@@ -70,32 +70,27 @@ for (const page of pages) {
   }
   await writeFile(resolve(dist, file), html);
 }
-for (const page of ["reservation", "admin", "privacy", "terms"]) {
+for (const page of ["reservation", "admin", "privacy", "terms", "mypage"]) {
   await mkdir(resolve(dist, page), {recursive:true});
   await cp(resolve(root, page, "index.html"), resolve(dist, page, "index.html"));
 }
-await mkdir(resolve(dist, "assets/js/demo"), {recursive:true});
 await build({
-  entryPoints: ["reservation-member", "admin"].map(name => resolve(root, `assets/js/demo/${name}.js`)),
-  outdir: resolve(dist, "assets/js/demo"), bundle: true, splitting: true,
+  entryPoints: ["demo/reservation-member", "demo/admin", "member/mypage"].map(name => resolve(root, `assets/js/${name}.js`)),
+  outbase: resolve(root, "assets/js"), outdir: resolve(dist, "assets/js"), bundle: true, splitting: true,
   format: "esm", platform: "browser", target: ["es2022"], minify: true,
   chunkNames: "shared/[name]-[hash]",
 });
-for (const page of ["reservation", "admin"]) {
-  const path = resolve(dist, page, "index.html");
-  let html = await readFile(path, "utf8");
-  for (const asset of ["assets/css/booking-demo.css", `assets/js/demo/${page === "reservation" ? "reservation-member" : page}.js`]) {
-    const version = createHash("sha256").update(await readFile(resolve(dist, asset))).digest("hex").slice(0,12);
-    html = html.replaceAll(`"../${asset}"`, `"../${asset}?v=${version}"`);
-  }
-  if (page === "reservation") {
-    if (!html.includes('id="show-my-page"') || !html.includes('reservation-member.js?v=')) throw new Error("Reservation member HTML mismatch");
-    const js = await readFile(resolve(dist, "assets/js/demo/reservation-member.js"), "utf8");
-    if (!js.includes("my_page") || !js.includes("register_birthday") || !js.includes("show-my-page")) throw new Error("Reservation member bundle mismatch");
-  }
-  await writeFile(path, html);
+for (const [page,css,js] of [
+ ["reservation","booking-demo","demo/reservation-member"], ["admin","booking-demo","demo/admin"],
+ ["mypage","mypage","member/mypage"], ["privacy","legal",null], ["terms","legal",null],
+]) {
+ const path=resolve(dist,page,"index.html");let html=await readFile(path,"utf8");
+ for(const asset of [`assets/css/${css}.css`,...(js?[`assets/js/${js}.js`]:[])]){
+  const version=createHash("sha256").update(await readFile(resolve(dist,asset))).digest("hex").slice(0,12);
+  html=html.replaceAll(`"../${asset}"`,`"../${asset}?v=${version}"`);
+ }
+ await writeFile(path,html);
 }
-
 await writeFile(resolve(dist, ".nojekyll"), "");
 await writeFile(
   resolve(dist, "robots.txt"),

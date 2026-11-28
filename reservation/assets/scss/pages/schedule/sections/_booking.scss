@@ -1,0 +1,54 @@
+#booking {
+  background: #eaf1f2;
+}
+
+.join-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px;
+}
+.join-steps li {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  gap: 20px;
+  padding: 23px 0;
+  border-bottom: 1px solid var(--line);
+}
+.join-steps li:first-child {
+  padding-top: 0;
+}
+.join-steps li > span {
+  font-size: 12px;
+  color: #b76b35;
+  padding-top: 4px;
+}
+.join-steps h3 {
+  font-size: 17px;
+  line-height: 1.7;
+  margin: 0 0 10px;
+}
+.join-steps p {
+  margin-bottom: 0;
+}
+
+
+.schedule-page #booking .chapter-number{font-family:var(--display);font-size:clamp(26px,4vw,58px);line-height:1;font-weight:900;letter-spacing:-.06em;display:block;max-width:340px;color:#12354250;}
+
+
+.public-games {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:48px 40px;}
+.public-games .game-card {min-width:0;border-top:1px solid var(--ink);padding-top:24px;}
+.public-games .game-date {font-size:clamp(28px,3.3vw,45px);letter-spacing:-.04em;margin:0 0 12px;}
+.public-games .game-date small {font-size:14px;margin-left:10px;}
+.public-games .game-time {font-size:16px;letter-spacing:.06em;}
+.public-games .game-venue {font-size:20px;font-weight:600;margin:20px 0 8px;overflow-wrap:anywhere;}
+.public-games .game-court {font-size:14px;color:var(--muted);overflow-wrap:anywhere;}
+.public-games .game-meta {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:22px 0;padding:18px 0;border-block:1px solid var(--line);}
+.public-games .game-meta dt {font-size:12px;color:var(--muted);}
+.public-games .game-meta dd {font-size:16px;margin:10px 0 0;}
+.public-games .game-status {font-size:14px;line-height:1.9;}
+.public-games .button-row {display:flex;flex-wrap:wrap;gap:14px;margin-top:22px;}
+.public-games .button--disabled {opacity:.55;pointer-events:none;}
+.public-games .game-empty {grid-column:1/-1;font-size:16px;line-height:2;}
+.public-schedule .inline-note,.calendar-supplement .inline-note {font-size:14px;line-height:1.9;}
+.calendar-supplement {border-top:1px solid var(--line);}
+@media(max-width:720px){.public-games{grid-template-columns:1fr;gap:40px;}.public-games .game-date{font-size:32px;}}
